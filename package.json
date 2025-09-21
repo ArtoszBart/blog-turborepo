@@ -1,0 +1,17 @@
+{
+  "name": "blog-turborepo",
+  "version": "1.0.0",
+  "description": "Simple blog implemented with Next.js and Nest.js in Turborepo",
+  "homepage": "https://github.com/ArtoszBart/blog-turborepo#readme",
+  "bugs": {
+    "url": "https://github.com/ArtoszBart/blog-turborepo/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArtoszBart/blog-turborepo.git"
+  },
+  "license": "ISC",
+  "author": "Bartosz Art",
+  "main": "index.js",
+  "scripts": {}
+}
