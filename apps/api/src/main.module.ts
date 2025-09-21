@@ -8,6 +8,7 @@ import { PostModule } from './post/post.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { TagModule } from './tag/tag.module';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { UserModule } from './user/user.module';
     CommentModule,
     TagModule,
     LikeModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
