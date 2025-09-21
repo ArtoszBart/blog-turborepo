@@ -13,5 +13,16 @@
   "license": "ISC",
   "author": "Bartosz Art",
   "main": "index.js",
-  "scripts": {}
+  "packageManager": "npm@11.1.0",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.6"
+  }
 }
