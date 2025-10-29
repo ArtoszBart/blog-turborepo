@@ -1,8 +1,8 @@
 import { registerAs } from '@nestjs/config';
-import { JwtModuleOptions } from '@nestjs/jwt';
+import { JwtConfig } from '../types/jwt-config';
 import { PeriodString } from '../types/period-string';
 
-export default registerAs('jwt', (): JwtModuleOptions => {
+export default registerAs('jwt', (): JwtConfig => {
   return {
     secret: process.env.JWT_SECRET as string,
     signOptions: {
