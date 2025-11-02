@@ -1,0 +1,52 @@
+@use '../../styles/base/resolutions' as *;
+
+.hero {
+  padding-top: 3rem;
+  color: #fff;
+  background: linear-gradient(
+    to bottom right,
+    oklch(68.5% 0.169 237.323),
+    oklch(58.5% 0.233 277.117)
+  );
+
+  &_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 4rem;
+    padding-inline: 2rem;
+
+    &_content {
+      text-align: center;
+
+      &_intro {
+        letter-spacing: 0.025em;
+      }
+
+      &_title {
+        text-transform: capitalize;
+        margin-block: 1.25rem;
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 1;
+      }
+
+      &_description {
+        font-size: 1.25rem;
+        line-height: 1.5;
+      }
+    }
+  }
+}
+
+@include media-md {
+  .hero_container {
+    flex-direction: row;
+
+    &_content {
+      width: 40%;
+      text-align: left;
+    }
+  }
+}
