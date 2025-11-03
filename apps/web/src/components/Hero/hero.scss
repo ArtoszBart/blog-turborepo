@@ -1,12 +1,12 @@
-@use '../../styles/base/resolutions' as *;
+@use '../../styles/base' as *;
 
 .hero {
-  padding-top: 3rem;
-  color: #fff;
+  padding-top: 8rem;
+  color: $color-primary;
   background: linear-gradient(
     to bottom right,
-    oklch(68.5% 0.169 237.323),
-    oklch(58.5% 0.233 277.117)
+    $color-accent-1,
+    $color-accent-2
   );
 
   &_container {

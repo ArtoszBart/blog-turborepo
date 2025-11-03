@@ -1,3 +1,4 @@
+import Header from '@/components/Header';
 import '@/styles/main.scss';
 import type { Metadata } from 'next';
 import { Geist } from 'next/font/google';
@@ -18,7 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' className={geist.className} suppressHydrationWarning>
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

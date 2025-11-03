@@ -1,0 +1,62 @@
+@use '../../styles/base' as *;
+
+$button-size: 32px;
+$bars-gap: 7px;
+$bar-width: 22px;
+$bar-height: 2px;
+
+@mixin bar-style {
+  content: '';
+  position: absolute;
+  width: $bar-width;
+  height: $bar-height;
+  background: $color-primary;
+  border-radius: 2px;
+}
+
+@mixin bar-style-opened {
+  background: $color-secondary;
+}
+
+.menu-btn {
+  position: relative;
+  cursor: pointer;
+  width: $button-size;
+  aspect-ratio: 1 / 1;
+
+  @include media-md {
+    display: none;
+  }
+
+  &-icon {
+    @include bar-style;
+    left: calc($button-size / 2 - $bar-width / 2);
+    top: calc($button-size / 2 - $bar-height / 2);
+    transition: transform $animation;
+
+    &::before {
+      @include bar-style;
+      top: -$bars-gap;
+    }
+
+    &::after {
+      @include bar-style;
+      top: $bars-gap;
+    }
+
+    &.opened {
+      transform: rotate(-360deg);
+      background: transparent !important;
+
+      &::before {
+        transform: rotate(45deg) translate(5px, 5px);
+        @include bar-style-opened;
+      }
+
+      &::after {
+        @include bar-style-opened;
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+    }
+  }
+}
