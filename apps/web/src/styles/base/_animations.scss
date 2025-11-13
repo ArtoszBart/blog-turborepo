@@ -1,1 +1,4 @@
-$animation: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+$animation: 0.3s $easing-standard;
+$animation-fast: 0.2s $easing-standard;

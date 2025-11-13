@@ -1,1 +1,9 @@
 @use './base/reset';
+
+h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  color: #4b5563;
+  line-height: 1.25;
+}

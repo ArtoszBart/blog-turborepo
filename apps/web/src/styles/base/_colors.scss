@@ -1,6 +1,13 @@
 $color-primary: #fff;
 $color-primary-light: #f3f4f6;
-$color-secondary: #374151;
 
-$color-accent-1: oklch(68.5% 0.169 237.323);
-$color-accent-2: oklch(58.5% 0.233 277.117);
+$color-secondary: hsl(217, 19%, 30%);
+$color-secondary-light: hsl(217, 19%, 50%);
+$color-secondary-lighter: hsl(219, 19%, 70%);
+$color-secondary-lightest: hsl(217, 19%, 90%);
+
+$color-accent-1: hsl(199, 100%, 48%);
+
+$color-accent-2-darker: hsl(241, 100%, 49%);
+$color-accent-2-dark: hsl(241, 100%, 59%);
+$color-accent-2: hsl(241, 100%, 69%);

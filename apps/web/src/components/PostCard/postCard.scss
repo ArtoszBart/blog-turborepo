@@ -1,0 +1,70 @@
+@use '../../styles/base' as *;
+@use 'sass:color';
+
+.post-card {
+  overflow: hidden;
+  box-shadow:
+    0 4px 6px -1px rgba($color-secondary, 0.1),
+    2px 2px 8px 3px rgba($color-secondary, 0.15);
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+
+  &_thumbnail {
+    position: relative;
+    height: 15rem;
+  }
+
+  &_content {
+    flex-grow: 1;
+    padding: 1.5rem 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    &_title {
+      margin-top: 1rem;
+      color: $color-secondary;
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.5rem;
+    }
+
+    &_snippet {
+      color: $color-secondary-light;
+      line-height: 1.35rem;
+    }
+
+    &_link {
+      align-self: flex-start;
+      margin-top: auto;
+      margin-left: calc(-0.2rem - 2px);
+      border: 2px solid transparent;
+      border-radius: 0.4rem;
+      padding: 0.4rem 0.2rem;
+      color: $color-accent-2;
+      font-weight: 600;
+      text-transform: uppercase;
+      transition:
+        border-color $animation,
+        transform $animation-fast;
+
+      &:hover {
+        border-color: currentColor;
+        color: $color-accent-2-dark;
+      }
+
+      &:active {
+        transform: translateY(2px);
+        color: $color-accent-2-darker;
+      }
+    }
+  }
+
+  &_footer {
+    border-top: 1px solid $color-secondary-lightest;
+    padding: 0.8rem 1.5rem;
+    color: $color-secondary-lighter;
+    font-size: 0.75rem;
+  }
+}
