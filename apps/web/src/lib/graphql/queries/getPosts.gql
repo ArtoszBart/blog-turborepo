@@ -1,5 +1,5 @@
-query {
-  posts {
+query posts($skip: Float, $take: Float) {
+  posts(skip: $skip, take: $take) {
     id
     title
     slug
@@ -7,4 +7,5 @@ query {
     content
     createdAt
   }
+  postCount
 }

@@ -5,12 +5,15 @@ type GraphQLResponse<T> = {
   errors?: { message: string }[];
 };
 
-const fetchGraphQL = async <T>(gqlQuery: DocumentNode): Promise<T> => {
+const fetchGraphQL = async <T>(
+  gqlQuery: DocumentNode,
+  variables = {}
+): Promise<T> => {
   const query = print(gqlQuery);
   const response = await fetch(`${process.env.BACKEND_URL}/graphql`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ query }),
+    body: JSON.stringify({ query, variables }),
   });
 
   if (!response.ok) {
