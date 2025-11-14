@@ -11,7 +11,6 @@ export default function PostCard({ post }: { post: Post }) {
           src={post.thumbnail ?? '/no-image.webp'}
           alt={post.title ?? ''}
           fill
-          objectFit='cover'
         />
       </div>
       <div className='post-card_content'>

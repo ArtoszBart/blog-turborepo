@@ -13,6 +13,10 @@
   &_thumbnail {
     position: relative;
     height: 15rem;
+
+    img {
+      object-fit: cover;
+    }
   }
 
   &_content {
