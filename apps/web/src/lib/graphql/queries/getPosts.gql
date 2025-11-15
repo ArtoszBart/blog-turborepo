@@ -7,5 +7,5 @@ query posts($skip: Float, $take: Float) {
     content
     createdAt
   }
-  postCount
+  totalPosts
 }

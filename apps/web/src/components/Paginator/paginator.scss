@@ -1,0 +1,29 @@
+@use '../../styles/base' as *;
+
+.paginator {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+
+  .paginator_ellipsis {
+    user-select: none;
+  }
+
+  .paginator_item {
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.375rem;
+    transition: all $animation-fast;
+
+    &:hover {
+      color: $color-accent-2-darker;
+    }
+
+    &.active {
+      background: $color-accent-1;
+      color: $color-primary;
+    }
+  }
+}

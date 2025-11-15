@@ -20,7 +20,7 @@ export class PostResolver {
   }
 
   // @UseGuards(JwtAuthGuard)
-  @Query(() => Int, { name: 'postCount' })
+  @Query(() => Int, { name: 'totalPosts' })
   count() {
     return this.postService.count();
   }

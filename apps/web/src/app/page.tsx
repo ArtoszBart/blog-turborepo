@@ -1,19 +1,23 @@
 import Hero from '@/components/Hero';
 import Posts from '@/components/Posts/Posts';
 import { fetchPosts } from '@/lib/actions/postActions';
+import {
+  getPaginationSearchParams,
+  PaginationSearchParams,
+} from '@/lib/pagination';
 
 interface IProps {
-  searchParams: Promise<{ page: string | undefined }>;
+  searchParams: PaginationSearchParams;
 }
 
 export default async function HomePage({ searchParams }: IProps) {
-  const { page } = await searchParams;
-  const { posts } = await fetchPosts({ page });
+  const { page, pageSize } = await getPaginationSearchParams(searchParams);
+  const { posts, totalPosts } = await fetchPosts({ page, pageSize });
 
   return (
     <main>
       <Hero />
-      <Posts posts={posts} />
+      <Posts posts={posts} currentPage={page} totalPosts={totalPosts} />
     </main>
   );
 }
