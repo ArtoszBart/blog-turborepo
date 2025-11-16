@@ -18,7 +18,7 @@ export default function Paginator({ currentPage, totalItems }: IProps) {
       {pageNumbers.map((page, idx) =>
         page !== '...' ? (
           <Link
-            key={page}
+            key={idx}
             className={
               'paginator_item' + (currentPage === page ? ' active' : '')
             }
