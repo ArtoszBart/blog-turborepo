@@ -1,6 +1,10 @@
+import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 
 const useHeader = () => {
+  const pathName = usePathname();
+  const isHomePage = pathName === '/';
+
   const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -45,6 +49,7 @@ const useHeader = () => {
     handleMenuItemClick,
     isMenuOpened,
     isScrolled,
+    isHomePage,
   };
 };
 

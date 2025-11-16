@@ -24,4 +24,9 @@ export class PostResolver {
   count() {
     return this.postService.count();
   }
+
+  @Query(() => Post, { nullable: true })
+  async getPostById(@Args('id', { type: () => Int }) id: number) {
+    return this.postService.findById(id);
+  }
 }

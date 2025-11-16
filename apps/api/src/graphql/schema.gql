@@ -55,6 +55,7 @@ type Post {
 type Query {
   posts(skip: Float, take: Float): [Post!]!
   totalPosts: Int!
+  getPostById(id: Int!): Post
 }
 
 type Mutation {

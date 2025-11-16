@@ -15,7 +15,7 @@ export default async function HomePage({ searchParams }: IProps) {
   const { posts, totalPosts } = await fetchPosts({ page, pageSize });
 
   return (
-    <main>
+    <main className='main-page'>
       <Hero />
       <Posts posts={posts} currentPage={page} totalPosts={totalPosts} />
     </main>

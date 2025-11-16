@@ -1,7 +1,7 @@
 'use server';
 
 import { Post } from '@/models/Post';
-import fetchGraphQL, { getPostsGql } from '../graphql';
+import fetchGraphQL, { getPostByIdGql, getPostsGql } from '../graphql';
 import { PaginationParams } from '../pagination';
 
 type PostsResponse = {
@@ -16,4 +16,14 @@ export const fetchPosts = async ({ page, pageSize }: PaginationParams) => {
   });
 
   return data;
+};
+
+type GetPostResponse = {
+  getPostById: Post;
+};
+
+export const fetchPostById = async (id: number) => {
+  const data = await fetchGraphQL<GetPostResponse>(getPostByIdGql, { id: id });
+
+  return data.getPostById;
 };

@@ -1,9 +1,22 @@
 @use './base/reset';
+@use './base/colors' as *;
+
+main {
+  margin-top: 6rem;
+}
+
+h1 {
+  color: $color-secondary;
+  text-transform: capitalize;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+}
 
 h2 {
+  color: $color-secondary;
   font-size: 3rem;
   font-weight: 700;
   text-align: center;
-  color: #4b5563;
   line-height: 1.25;
 }

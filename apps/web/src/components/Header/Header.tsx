@@ -10,10 +10,10 @@ export default function Header() {
   const hook = useHeader();
 
   return (
-    <header className={hook.isScrolled ? 'scrolled' : ''}>
+    <header className={hook.isScrolled || !hook.isHomePage ? 'scrolled' : ''}>
       <Link href='/' className='logo'>
         <Image src='/logo.webp' alt='hero image' width={50} height={50} />
-        <h1>Playground</h1>
+        <span>Playground</span>
       </Link>
 
       <nav className={hook.isMenuOpened ? 'opened' : ''}>

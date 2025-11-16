@@ -1,8 +1,11 @@
 @use '../../styles/base' as *;
 
+.main-page {
+  margin-top: 0;
+}
+
 .hero {
   padding-top: 8rem;
-  color: $color-primary;
   background: linear-gradient(
     to bottom right,
     $color-accent-1,
@@ -21,18 +24,18 @@
       text-align: center;
 
       &_intro {
+        color: $color-primary;
         letter-spacing: 0.025em;
       }
 
       &_title {
-        text-transform: capitalize;
+        color: $color-primary;
         margin-block: 1.25rem;
         font-size: 3rem;
-        font-weight: 700;
-        line-height: 1;
       }
 
       &_description {
+        color: $color-primary;
         font-size: 1.25rem;
         line-height: 1.5;
       }
