@@ -16,6 +16,7 @@ export default function SignUpForm() {
       className='auth-form'
       schema={SignUpFormSchema}
       onSubmit={signUp}
+      submitLabel='Sign Up'
     >
       <Input
         className='auth-form_input'

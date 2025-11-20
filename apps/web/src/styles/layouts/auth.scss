@@ -36,6 +36,13 @@
     flex-direction: column;
     gap: 0.5rem;
 
+    &_error-message,
+    &_input_error-message {
+      color: $color-error;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+
     &_input {
       display: flex;
       flex-direction: column;
@@ -60,10 +67,7 @@
         }
       }
 
-      span {
-        color: $color-error;
-        font-size: 0.875rem;
-        line-height: 1.25rem;
+      &_error-message {
         opacity: 0;
         transition: opacity $animation;
       }
@@ -81,8 +85,6 @@
     }
 
     &_password-info {
-      margin-bottom: 1rem;
-
       span {
         font-weight: 600;
         font-size: 0.9rem;
@@ -121,6 +123,10 @@
           }
         }
       }
+    }
+
+    button {
+      margin-top: 1rem;
     }
   }
 

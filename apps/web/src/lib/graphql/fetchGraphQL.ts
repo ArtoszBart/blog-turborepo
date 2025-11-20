@@ -1,9 +1,5 @@
-import { type DocumentNode, GraphQLFormattedError, print } from 'graphql';
-
-type GraphQLResponse<T> = {
-  data?: T;
-  errors?: GraphQLFormattedError[];
-};
+import { type DocumentNode, print } from 'graphql';
+import { GraphQLResponse } from './types/gqlResponse';
 
 const fetchGraphQL = async <T>(
   gqlQuery: DocumentNode,
@@ -23,7 +19,10 @@ const fetchGraphQL = async <T>(
   const result: GraphQLResponse<T> = await response.json();
 
   if (result.errors) {
-    if (result.errors[0].extensions?.status === 409) {
+    const status = result.errors[0].extensions?.originalError.statusCode;
+    const knownErrors = [400, 409];
+
+    if (status && knownErrors.includes(status)) {
       return result;
     }
 

@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
 import { verify } from 'argon2';
@@ -15,11 +19,10 @@ export class AuthService {
 
   async validateLocalUser({ email, password }: SignInInput) {
     const user = await this.prisma.user.findUnique({ where: { email } });
-    if (!user) throw new UnauthorizedException('User not found');
+    if (!user) throw new BadRequestException('User not found');
 
     const passwordMatched = await verify(user.password ?? '', password);
-    if (!passwordMatched)
-      throw new UnauthorizedException('Invalid credentials');
+    if (!passwordMatched) throw new BadRequestException('Invalid credentials');
 
     return user;
   }

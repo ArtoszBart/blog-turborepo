@@ -10,7 +10,7 @@ export interface IForm<T> {
 }
 
 const useForm = <T>({ schema, onSubmit }: IForm<T>) => {
-  const [state, action] = useActionState(onSubmit, undefined);
+  const [state, action, isSubmitting] = useActionState(onSubmit, undefined);
 
   const formProps = rhfUseForm({
     resolver: zodResolver(schema),
@@ -42,10 +42,8 @@ const useForm = <T>({ schema, onSubmit }: IForm<T>) => {
     return () => subscription.unsubscribe();
   }, [formProps]);
 
-  const serverErrorMessage = state?.message;
-  const isSubmitting = formProps.formState.isSubmitting;
-  const isSubmitDisabled =
-    !formProps.formState.isValid || formProps.formState.isSubmitting;
+  const serverErrorMessage = isSubmitting ? undefined : state?.message;
+  const isSubmitDisabled = !formProps.formState.isValid || isSubmitting;
 
   return {
     formProps,

@@ -7,6 +7,7 @@ import useForm, { IForm } from './useForm';
 
 interface IProps<T> extends IForm<T>, PropsWithChildren {
   className?: string;
+  submitLabel: string;
 }
 
 export default function Form<T>({
@@ -14,6 +15,7 @@ export default function Form<T>({
   schema,
   children,
   onSubmit,
+  submitLabel,
 }: IProps<T>) {
   const hook = useForm({ schema, onSubmit });
 
@@ -22,13 +24,15 @@ export default function Form<T>({
       <form className={className} action={hook.action} noValidate>
         {children}
 
-        {hook.serverErrorMessage && <span>{hook.serverErrorMessage}</span>}
+        <span className={`${className}_error-message`}>
+          {hook.serverErrorMessage}
+        </span>
 
         <SubmitButton
           isSubmitting={hook.isSubmitting}
           disabled={hook.isSubmitDisabled}
         >
-          Sign Up
+          {submitLabel}
         </SubmitButton>
       </form>
     </FormProvider>

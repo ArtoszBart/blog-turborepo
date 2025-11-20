@@ -4,7 +4,6 @@ import { CSSProperties, PropsWithChildren } from 'react';
 
 interface IProps extends PropsWithChildren {
   style?: CSSProperties;
-  onSubmit?: (e: unknown) => void;
   disabled: boolean;
   isSubmitting: boolean;
 }
@@ -15,12 +14,7 @@ export default function SubmitButton({
   ...props
 }: IProps) {
   return (
-    <button
-      onClick={props.onSubmit}
-      type='submit'
-      aria-disabled={props.disabled}
-      {...props}
-    >
+    <button type='submit' aria-disabled={props.disabled} {...props}>
       {isSubmitting ? (
         <span className='button_loading'>
           <span />
