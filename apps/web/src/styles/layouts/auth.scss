@@ -1,0 +1,152 @@
+@use '../base' as *;
+
+.auth {
+  margin-top: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $color-secondary-lightest;
+
+  &_container {
+    box-shadow: $shadow;
+    border-radius: 0.75rem;
+    width: 24rem;
+    background: $color-primary;
+    margin: 1rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &_title {
+    font-size: 1.5rem;
+    color: $color-secondary;
+    text-align: center;
+    margin: 0;
+  }
+
+  &-form {
+    width: 100%;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &_input {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+
+      label {
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: $color-secondary;
+      }
+
+      input {
+        padding: 0.65rem 1rem;
+        font-size: 1rem;
+        border: 1.5px solid $color-secondary-lightest;
+        border-radius: 0.5rem;
+        transition: all $animation-fast;
+
+        &:focus {
+          border-color: $color-accent-2;
+          box-shadow: 0 0 16px 3px rgba($color-accent-2, 0.15);
+        }
+      }
+
+      span {
+        color: $color-error;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        opacity: 0;
+        transition: opacity $animation;
+      }
+
+      &.invalid {
+        input {
+          border-color: $color-error;
+          background: $color-error-lightest;
+        }
+
+        span {
+          opacity: 1;
+        }
+      }
+    }
+
+    &_password-info {
+      margin-bottom: 1rem;
+
+      span {
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: $color-secondary;
+      }
+
+      ul {
+        list-style: initial;
+
+        li {
+          font-size: 0.875rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding-block: 0.2rem;
+          color: $color-secondary-lighter;
+          transition:
+            color $animation,
+            transform $animation;
+
+          svg {
+            opacity: 0.7;
+            transition:
+              opacity $animation,
+              transform $animation;
+          }
+
+          &.valid {
+            color: $color-success;
+            animation: $animation-fade-in;
+
+            svg {
+              opacity: 1;
+              transform: scale(1.1);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &_footer {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+
+    & p {
+      margin: 0;
+      color: $color-secondary;
+    }
+
+    & a {
+      color: $color-accent-2;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $color-accent-2-dark;
+        text-decoration: underline;
+      }
+    }
+  }
+}

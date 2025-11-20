@@ -1,0 +1,49 @@
+@use './colors' as *;
+@use './animations' as *;
+
+button {
+  padding: 0.65rem 1rem;
+  border: none;
+  border-radius: 10px;
+  background: $color-accent-2;
+  color: $color-primary;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all $animation-fast;
+
+  &:hover:enabled {
+    background: $color-accent-2-dark;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  & > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1em;
+  }
+
+  .button_loading {
+    gap: 4px;
+
+    span {
+      width: 6px;
+      height: 6px;
+      background: $color-primary;
+      border-radius: 50%;
+      animation: $animation-pulse;
+
+      &:nth-child(2) {
+        animation-delay: 0.15s;
+      }
+      &:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+    }
+  }
+}

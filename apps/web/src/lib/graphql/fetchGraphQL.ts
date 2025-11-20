@@ -1,14 +1,14 @@
-import { type DocumentNode, print } from 'graphql';
+import { type DocumentNode, GraphQLFormattedError, print } from 'graphql';
 
 type GraphQLResponse<T> = {
   data?: T;
-  errors?: { message: string }[];
+  errors?: GraphQLFormattedError[];
 };
 
 const fetchGraphQL = async <T>(
   gqlQuery: DocumentNode,
   variables = {}
-): Promise<T> => {
+): Promise<GraphQLResponse<T>> => {
   const query = print(gqlQuery);
   const response = await fetch(`${process.env.BACKEND_URL}/graphql`, {
     method: 'POST',
@@ -23,6 +23,10 @@ const fetchGraphQL = async <T>(
   const result: GraphQLResponse<T> = await response.json();
 
   if (result.errors) {
+    if (result.errors[0].extensions?.status === 409) {
+      return result;
+    }
+
     console.error('GraphQL errors:', result.errors);
     throw new Error('Failed to fetch the data from GraphQL');
   }
@@ -31,7 +35,7 @@ const fetchGraphQL = async <T>(
     throw new Error('No data returned from GraphQL');
   }
 
-  return result.data;
+  return result;
 };
 
 export default fetchGraphQL;
