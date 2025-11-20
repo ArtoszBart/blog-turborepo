@@ -1,11 +1,8 @@
 @use '../../styles/base' as *;
-@use 'sass:color';
 
 .post-card {
   overflow: hidden;
-  box-shadow:
-    0 4px 6px -1px rgba($color-secondary, 0.1),
-    2px 2px 8px 3px rgba($color-secondary, 0.15);
+  box-shadow: $shadow-l;
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
