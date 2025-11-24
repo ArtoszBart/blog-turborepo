@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import fetchGraphQL, { createUserGql, signInGql } from '../graphql';
 import { CreateUserResponse, SignInResponse } from '../graphql/types/user';
+import { createSession } from '../session';
 import { formatErrors } from '../zod/formatErrors';
 import { SignInFormDTO, SignInFormSchema } from '../zod/schemas/signInForm';
 import { SignUpFormDTO, SignUpFormSchema } from '../zod/schemas/signUpForm';
@@ -71,7 +72,11 @@ export const signIn = async (
     };
   }
 
-  // TODO: create session
+  const { accessToken, ...user } = response.data!.signIn!;
+  await createSession({
+    user,
+    accessToken,
+  });
 
   revalidatePath('/');
   redirect('/');
