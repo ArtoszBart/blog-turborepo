@@ -10,6 +10,10 @@ export default function SignInPage() {
 
       <div className='auth_footer'>
         <Link href='/auth/forgot'>Forgot your password?</Link>
+        <div>
+          <p>Don’t have an account?</p>
+          <Link href='/auth/signup'>Sign Up</Link>
+        </div>
       </div>
     </>
   );

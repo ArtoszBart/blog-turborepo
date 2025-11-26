@@ -1,0 +1,75 @@
+@use '../../../../styles/base' as *;
+
+.auth-menu {
+  &_trigger {
+    display: none;
+  }
+
+  &_userinfo {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: $color-secondary;
+  }
+}
+
+@include media-md {
+  .auth-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 999999;
+    box-shadow: $shadow-l;
+    border-radius: 8px;
+    min-width: 14rem;
+    margin-top: 0.5rem;
+    padding-block: 1rem 0.5rem;
+    background: rgba($color-primary, 0.95);
+    backdrop-filter: blur(3px);
+    transform-origin: top right;
+    transform: scale(0);
+    opacity: 0;
+    transition: all $animation;
+
+    &.opened {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    &_trigger {
+      cursor: pointer;
+      margin-left: 1rem;
+      display: initial;
+      transition: transform $animation-fast;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
+    &_userinfo {
+      margin-top: 0;
+    }
+
+    a {
+      width: 100%;
+      border-bottom: 1px solid rgba($color-secondary, 0.2);
+      padding-inline: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: $color-secondary;
+      text-align: center;
+
+      &::after {
+        background-color: rgba($color-secondary, 0.8);
+      }
+
+      &:hover {
+        color: rgba($color-secondary, 0.8);
+      }
+    }
+  }
+}

@@ -1,37 +1,21 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
-import HamburgerButton from '../HamburgerButton';
+import HeaderWrapper from './components/HeaderWrapper';
+import Navigation from './components/Navigation';
+import NavigationWrapper from './components/NavigationWrapper';
 import './header.scss';
-import useHeader from './useHeader';
 
-export default function Header() {
-  const hook = useHeader();
-
+export default async function Header() {
   return (
-    <header className={hook.isScrolled || !hook.isHomePage ? 'scrolled' : ''}>
+    <HeaderWrapper>
       <Link href='/' className='logo'>
-        <Image src='/logo.webp' alt='hero image' width={50} height={50} />
+        <Image src='/logo.webp' alt='logo' width={50} height={50} />
         <span>Playground</span>
       </Link>
 
-      <nav className={hook.isMenuOpened ? 'opened' : ''}>
-        <Link href='/' onClick={hook.handleMenuItemClick}>
-          Blog
-        </Link>
-        <Link href='#about' onClick={hook.handleMenuItemClick}>
-          About
-        </Link>
-        <Link href='#contact' onClick={hook.handleMenuItemClick}>
-          Contact
-        </Link>
-      </nav>
-
-      <HamburgerButton
-        isOpened={hook.isMenuOpened}
-        onClick={hook.handleHamburgerClick}
-      />
-    </header>
+      <NavigationWrapper>
+        <Navigation />
+      </NavigationWrapper>
+    </HeaderWrapper>
   );
 }

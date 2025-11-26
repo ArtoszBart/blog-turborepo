@@ -1,5 +1,3 @@
-'use client';
-
 import { memo } from 'react';
 import './hamburger.scss';
 
@@ -10,7 +8,7 @@ interface IProps {
 
 function HamburgerButton({ isOpened, onClick }: IProps) {
   return (
-    <div className='menu-btn' onClick={() => onClick()}>
+    <div className='menu-btn' onClick={onClick}>
       <span className={'menu-btn-icon' + (isOpened ? ' opened' : '')}></span>
     </div>
   );

@@ -18,27 +18,7 @@ header {
   &.scrolled {
     background: rgba($color-primary, 0.8);
     box-shadow: $shadow;
-
     color: $color-secondary;
-
-    nav a {
-      &::after {
-        background-color: rgba($color-secondary, 0.8);
-      }
-
-      &:hover {
-        color: rgba($color-secondary, 0.8);
-      }
-    }
-
-    .menu-btn-icon {
-      background: $color-secondary;
-
-      &::before,
-      &::after {
-        background: $color-secondary;
-      }
-    }
   }
 
   .logo {
@@ -57,97 +37,6 @@ header {
       line-height: 2rem;
       font-weight: 700;
       padding: 0.5rem;
-    }
-  }
-
-  nav {
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100vh;
-    background: rgba($color-primary, 0.95);
-    backdrop-filter: blur(3px);
-    min-width: 5.5rem;
-    transform: translateX(100%);
-    transition: transform $animation;
-    padding-top: 5rem;
-    padding-bottom: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 8px 0 0 8px;
-
-    &.opened {
-      transform: translateX(0%);
-    }
-
-    a {
-      position: relative;
-      border-bottom: 1px solid rgba($color-secondary, 0.2);
-      color: $color-secondary;
-      padding: 0.6rem 3rem;
-      width: 100%;
-      text-align: center;
-      display: block;
-
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        width: 0%;
-        height: 1px;
-        background-color: rgba($color-secondary, 0.8);
-        transition: all $animation;
-        transform: translateX(-50%);
-      }
-
-      &:hover {
-        color: rgba($color-secondary, 0.8);
-
-        &::after {
-          width: 100%;
-        }
-      }
-    }
-  }
-}
-
-@include media-md {
-  header {
-    display: flex;
-
-    &.scrolled nav a {
-      color: $color-secondary;
-
-      &:hover {
-        color: rgba($color-secondary, 0.8);
-      }
-    }
-
-    nav {
-      position: static;
-      height: auto;
-      background: none;
-      backdrop-filter: none;
-      min-width: auto;
-      transform: translateX(0%);
-      padding-block: 0;
-      flex-direction: row;
-
-      a {
-        border-bottom: none;
-        padding-inline: 1rem;
-        color: $color-primary;
-
-        &:hover {
-          color: rgba($color-primary, 0.8);
-        }
-
-        &::after {
-          background-color: rgba($color-primary, 0.8);
-        }
-      }
     }
   }
 }

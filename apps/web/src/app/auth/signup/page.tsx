@@ -9,8 +9,10 @@ export default function SignUpPage() {
       <SignUpForm />
 
       <div className='auth_footer'>
-        <p>Already have an account?</p>
-        <Link href='/auth/signin'>Sign In</Link>
+        <div>
+          <p>Already have an account?</p>
+          <Link href='/auth/signin'>Sign In</Link>
+        </div>
       </div>
     </>
   );

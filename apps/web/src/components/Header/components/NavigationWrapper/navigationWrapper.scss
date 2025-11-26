@@ -1,0 +1,108 @@
+@use '../../../../styles/base' as *;
+
+header {
+  nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    border-radius: 8px 0 0 8px;
+    min-width: 5.5rem;
+    height: 100vh;
+    padding-block: 5rem;
+    background: rgba($color-primary, 0.95);
+    backdrop-filter: blur(3px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateX(100%);
+    transition: transform $animation;
+
+    a {
+      position: relative;
+      width: 100%;
+      border-bottom: 1px solid rgba($color-secondary, 0.2);
+      padding-block: 0.6rem;
+      padding-inline: 3rem;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      align-items: center;
+      color: $color-secondary;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0%;
+        height: 1px;
+        background-color: rgba($color-secondary, 0.8);
+        transition: all $animation;
+        transform: translateX(-50%);
+      }
+
+      &:hover {
+        color: rgba($color-secondary, 0.8);
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
+    }
+  }
+
+  .opened nav {
+    transform: translateX(0%);
+  }
+
+  &.scrolled .menu-btn-icon {
+    &,
+    &::before,
+    &::after {
+      background: $color-secondary;
+    }
+  }
+}
+
+@include media-md {
+  header {
+    nav {
+      position: initial;
+      height: auto;
+      padding: 0;
+      background: none;
+      backdrop-filter: none;
+      flex-direction: row;
+      transform: translateX(0);
+
+      a {
+        width: auto;
+        border-bottom: none;
+        padding-inline: 1rem;
+        gap: 0.5rem;
+        color: $color-primary;
+
+        &:hover {
+          color: rgba($color-primary, 0.8);
+        }
+
+        &::after {
+          background-color: rgba($color-primary, 0.8);
+        }
+      }
+    }
+
+    &.scrolled nav a {
+      color: $color-secondary;
+
+      &:hover {
+        color: rgba($color-secondary, 0.8);
+      }
+
+      &::after {
+        background-color: rgba($color-secondary, 0.8);
+      }
+    }
+  }
+}

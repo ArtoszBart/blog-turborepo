@@ -1,0 +1,18 @@
+@use '../../styles/base' as *;
+
+.avatar {
+  position: relative;
+  width: 2.5rem;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
+  background: $color-primary;
+  color: $color-accent-2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    object-fit: cover;
+  }
+}
