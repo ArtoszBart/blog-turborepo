@@ -4,8 +4,10 @@
   overflow: hidden;
   box-shadow: $shadow-l;
   border-radius: 0.5rem;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 5;
+  gap: 0;
 
   &_thumbnail {
     position: relative;
@@ -17,14 +19,13 @@
   }
 
   &_content {
-    flex-grow: 1;
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 4;
     padding: 1.5rem 1.5rem 1rem;
-    display: flex;
-    flex-direction: column;
     gap: 1rem;
 
     &_title {
-      margin-top: 1rem;
       color: $color-secondary;
       font-size: 1.25rem;
       font-weight: 700;
@@ -37,8 +38,7 @@
     }
 
     &_link {
-      align-self: flex-start;
-      margin-top: auto;
+      justify-self: start;
       margin-left: calc(-0.2rem - 2px);
       border: 2px solid transparent;
       border-radius: 0.4rem;
