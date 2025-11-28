@@ -4,14 +4,25 @@ import { JwtModule } from '@nestjs/jwt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthResolver } from './auth.resolver';
 import { AuthService } from './auth.service';
+import googleConfig from './config/google.config';
 import jwtConfig from './config/jwt.config';
+import { GoogleStrategy } from './strategies/google.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { AuthController } from './auth.controller';
 
 @Module({
   imports: [
     JwtModule.registerAsync(jwtConfig.asProvider()),
     ConfigModule.forFeature(jwtConfig),
+    ConfigModule.forFeature(googleConfig),
   ],
-  providers: [AuthResolver, AuthService, PrismaService, JwtStrategy],
+  providers: [
+    AuthResolver,
+    AuthService,
+    PrismaService,
+    JwtStrategy,
+    GoogleStrategy,
+  ],
+  controllers: [AuthController],
 })
 export class AuthModule {}

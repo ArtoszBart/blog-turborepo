@@ -144,6 +144,23 @@
       align-items: center;
     }
 
+    .auth_footer_separator {
+      width: 100%;
+      gap: 0.5rem;
+
+      hr {
+        flex-grow: 1;
+        height: 1px;
+        border: none;
+        background-color: $color-secondary-light;
+      }
+
+      span {
+        font-size: 0.875rem;
+        color: $color-secondary-light;
+      }
+    }
+
     p {
       margin: 0;
       color: $color-secondary;
@@ -158,6 +175,30 @@
       &:hover {
         color: $color-accent-2-dark;
         text-decoration: underline;
+      }
+    }
+
+    &_socials {
+      margin-top: 0.2rem;
+      display: flex;
+      justify-content: center;
+
+      a {
+        box-shadow: $shadow;
+        padding: 0.5rem;
+        border: 1px solid $color-secondary-lightest;
+        border-radius: 10px;
+        background: white;
+        display: flex;
+
+        &:hover {
+          box-shadow: $shadow-l;
+        }
+
+        svg {
+          width: 1.2rem;
+          height: 1.2rem;
+        }
       }
     }
   }

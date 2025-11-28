@@ -1,3 +1,4 @@
+import { BadRequestException } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
 import { SignInInput } from './dto/sign-in.input';
@@ -9,6 +10,9 @@ export class AuthResolver {
 
   @Mutation(() => AuthPayload)
   async signIn(@Args('signInInput') signInInput: SignInInput) {
+    if (!signInInput.password) {
+      throw new BadRequestException('Password cannot be empty');
+    }
     const user = await this.authService.validateLocalUser(signInInput);
 
     return await this.authService.login(user);
