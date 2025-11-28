@@ -2,8 +2,8 @@ import { Controller, Get, Request, Res, UseGuards } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { type Response } from 'express';
 import { AuthService } from './auth.service';
-import { GoogleAuthGuard } from './guards/google-auth/google-auth.guard';
-import { JwtAuthGuard } from './guards/jwt-auth/jwt-auth.guard';
+import { GoogleAuthGuard } from './guards/google-auth.guard';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {
