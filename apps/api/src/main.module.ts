@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
 import { CommentModule } from './comment/comment.module';
+import { validateEnv } from './env/env.schema';
 import { LikeModule } from './like/like.module';
 import { PostModule } from './post/post.module';
 import { PrismaModule } from './prisma/prisma.module';
@@ -17,7 +18,10 @@ import { UserModule } from './user/user.module';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/graphql/schema.gql'),
     }),
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      validate: validateEnv,
+    }),
     PrismaModule,
     PostModule,
     UserModule,

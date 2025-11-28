@@ -9,8 +9,7 @@ import { GoogleProfile } from '../types/google-profile';
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy) {
   constructor(
-    @Inject(googleConfig.KEY)
-    private readonly googleConfiguration: GoogleConfig,
+    @Inject(googleConfig.KEY) googleConfiguration: GoogleConfig,
     private readonly authService: AuthService,
   ) {
     super(googleConfiguration);

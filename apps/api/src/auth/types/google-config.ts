@@ -1,6 +1,5 @@
-export type GoogleConfig = {
-  clientID: string;
-  clientSecret: string;
+import { StrategyOptions } from 'passport-google-oauth20';
+
+export type GoogleConfig = Omit<StrategyOptions, 'callbackURL'> & {
   callbackURL: string;
-  scope: string[];
 };
