@@ -1,3 +1,4 @@
+import { SignInReqDTO, SignUpReqDTO } from '@blog-turborepo/types';
 import {
   BadRequestException,
   Injectable,
@@ -5,20 +6,25 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
-import { verify } from 'argon2';
+import { hash, verify } from 'argon2';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateUserInput } from 'src/user/dto/create-user.input';
-import { SignInInput } from './dto/sign-in.input';
+import { UserService } from 'src/user/user.service';
 import { AuthJwtPayload } from './types/auth-jwt-payload';
+import { OAuthUser } from './types/oath-user';
 
 @Injectable()
 export class AuthService {
   constructor(
     private prisma: PrismaService,
     private jwtService: JwtService,
+    private userService: UserService,
   ) {}
 
-  async validateLocalUser({ email, password }: SignInInput) {
+  async validateLocalUser({ email, password }: SignInReqDTO) {
+    if (!password) {
+      throw new BadRequestException('Password cannot be empty');
+    }
+
     const user = await this.prisma.user.findUnique({ where: { email } });
     if (!user) throw new BadRequestException('User not found');
 
@@ -46,6 +52,16 @@ export class AuthService {
     };
   }
 
+  async signUp(signUp: SignUpReqDTO) {
+    const { password, ...user } = signUp;
+    const hashedPassword = await hash(password);
+
+    return await this.userService.create({
+      ...user,
+      password: hashedPassword,
+    });
+  }
+
   async validateJwtUser(userId: number) {
     const user = await this.prisma.user.findUnique({ where: { id: userId } });
     if (!user) throw new UnauthorizedException('User not found!');
@@ -55,15 +71,21 @@ export class AuthService {
     return currentUser;
   }
 
-  async validateGoogleUser(googleUser: CreateUserInput) {
+  async validateOAuthUser(oauthUser: OAuthUser) {
     const user = await this.prisma.user.findUnique({
-      where: { email: googleUser.email },
+      where: { email: oauthUser.email },
+      omit: {
+        password: true,
+      },
     });
 
     if (user) return user;
 
     return await this.prisma.user.create({
-      data: googleUser,
+      data: { ...oauthUser, password: '' },
+      omit: {
+        password: true,
+      },
     });
   }
 }

@@ -12,12 +12,16 @@ interface IProps {
 
 export default async function HomePage({ searchParams }: IProps) {
   const { page, pageSize } = await getPaginationSearchParams(searchParams);
-  const { posts, totalPosts } = await fetchPosts({ page, pageSize });
+  const tmp = await fetchPosts({ page, pageSize });
 
   return (
     <main className='main-page'>
       <Hero />
-      <Posts posts={posts} currentPage={page} totalPosts={totalPosts} />
+      <Posts
+        posts={tmp?.posts ?? []}
+        currentPage={page}
+        totalPosts={tmp?.totalPosts ?? 0}
+      />
     </main>
   );
 }

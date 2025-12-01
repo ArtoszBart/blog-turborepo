@@ -1,0 +1,7 @@
+# NOTE: Remember to update SignUpResDTO type after making changes here.
+
+mutation signUp($payload: SignUpReqDTO!) {
+  signUp(createUserInput: $payload) {
+    id
+  }
+}

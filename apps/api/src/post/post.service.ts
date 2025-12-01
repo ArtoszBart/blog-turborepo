@@ -5,7 +5,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class PostService {
   constructor(private prisma: PrismaService) {}
 
-  async findAll({ skip, take }: { skip?: number; take?: number }) {
+  async findAll({ skip, take }: { skip?: number; take?: number } = {}) {
     return await this.prisma.post.findMany({ skip, take });
   }
 

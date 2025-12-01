@@ -1,12 +1,13 @@
 'use client';
 
 import { signIn } from '@/lib/actions/authActions';
-import { SignInFormDTO, SignInFormSchema } from '@/lib/zod/schemas/signInForm';
+import { SignInFormSchema } from '@/lib/zod/schemas/signInForm';
+import type { SignInReqDTO } from '@blog-turborepo/types';
 import Form, { Input } from '../common/Form';
 
 export default function SignInForm() {
   return (
-    <Form<SignInFormDTO>
+    <Form<SignInReqDTO>
       className='auth-form'
       schema={SignInFormSchema}
       onSubmit={signIn}

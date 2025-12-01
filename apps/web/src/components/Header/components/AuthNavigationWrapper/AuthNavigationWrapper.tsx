@@ -1,6 +1,6 @@
 'use client';
 
-import { User } from '@/models/User';
+import type { User } from '@blog-turborepo/types';
 import { PropsWithChildren } from 'react';
 import Avatar from '../../../Avatar/Avatar';
 import useAuthNavigationWrapper from './useAuthNavigationWrapper';

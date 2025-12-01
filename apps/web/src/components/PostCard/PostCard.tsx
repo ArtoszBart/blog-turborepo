@@ -1,9 +1,9 @@
-import { Post } from '@/models/Post';
+import type { PostsResDTO } from '@blog-turborepo/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import './postCard.scss';
 
-export default function PostCard({ post }: { post: Post }) {
+export default function PostCard({ post }: { post: PostsResDTO }) {
   return (
     <div className='post-card'>
       <div className='post-card_thumbnail'>

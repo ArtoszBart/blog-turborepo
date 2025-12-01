@@ -2,35 +2,16 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type AuthPayload {
-  id: Float!
+type SignInResDTO {
+  id: Int!
   name: String!
   avatar: String
   accessToken: String!
 }
 
-type User {
+type SignUpResDTO {
   id: Int!
-  name: String!
-  email: String!
-  bio: String
-  avatar: String
-  posts: [Post!]!
-  comments: [Comment!]!
 }
-
-type Comment {
-  id: Int!
-  content: String!
-  post: Post!
-  author: User!
-  createdAt: DateTime!
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type Tag {
   id: Int!
@@ -38,9 +19,18 @@ type Tag {
   posts: [Post!]!
 }
 
+type User {
+  id: Int!
+  name: String!
+  email: String!
+  password: String
+  bio: String
+  avatar: String
+}
+
 type Post {
   id: Int!
-  slug: String
+  slug: String!
   title: String!
   content: String!
   thumbnail: String
@@ -52,26 +42,46 @@ type Post {
   comments: [Comment!]!
 }
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Comment {
+  id: Int!
+  content: String!
+  post: Post!
+  author: User!
+  createdAt: DateTime!
+}
+
 type Query {
-  posts(skip: Float, take: Float): [Post!]!
+  posts(postsReqDTO: PostsReqDTO): [Post!]!
   totalPosts: Int!
-  getPostById(id: Int!): Post
+  getPostById(postReqDTO: PostReqDTO!): Post
+}
+
+input PostsReqDTO {
+  skip: Int
+  take: Int
+}
+
+input PostReqDTO {
+  id: Int!
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
-  signIn(signInInput: SignInInput!): AuthPayload!
+  signIn(signInReqDTO: SignInReqDTO!): SignInResDTO!
+  signUp(createUserInput: SignUpReqDTO!): SignUpResDTO!
 }
 
-input CreateUserInput {
+input SignInReqDTO {
+  email: String!
+  password: String!
+}
+
+input SignUpReqDTO {
   name: String!
   password: String!
   email: String!
-  bio: String
-  avatar: String
-}
-
-input SignInInput {
-  email: String!
-  password: String!
 }

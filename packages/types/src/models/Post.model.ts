@@ -1,15 +1,15 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { Comment } from 'src/comment/entities/comment.entity';
-import { Tag } from 'src/tag/entities/tag.entity';
-import { User } from 'src/user/entities/user.entity';
+import { Comment } from './Comment.model';
+import { Tag } from './Tag.model';
+import { User } from './User.model';
 
 @ObjectType()
 export class Post {
   @Field(() => Int)
   id: number;
 
-  @Field({ nullable: true })
-  slug?: string;
+  @Field()
+  slug: string;
 
   @Field()
   title: string;
@@ -17,8 +17,8 @@ export class Post {
   @Field()
   content: string;
 
-  @Field({ nullable: true })
-  thumbnail?: string;
+  @Field(() => String, { nullable: true })
+  thumbnail: string | null;
 
   @Field(() => Boolean)
   published: boolean;

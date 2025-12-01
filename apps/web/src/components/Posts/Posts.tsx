@@ -1,10 +1,10 @@
-import { Post } from '@/models/Post';
+import type { PostsResDTO } from '@blog-turborepo/types';
 import Paginator from '../Paginator';
 import PostCard from '../PostCard/PostCard';
 import './posts.scss';
 
 interface IProps {
-  posts: Post[];
+  posts: PostsResDTO[];
   currentPage: number;
   totalPosts: number;
 }

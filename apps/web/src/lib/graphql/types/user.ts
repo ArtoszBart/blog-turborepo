@@ -1,11 +1,9 @@
-import { User } from '@/models/User';
+import type { SignInResDTO, SignUpResDTO } from '@blog-turborepo/types';
 
-export type CreateUserResponse = {
-  createUser?: Pick<User, 'id' | 'name'>;
-  errors?: unknown;
+export type SignUpResponse = {
+  signUp: SignUpResDTO;
 };
 
 export type SignInResponse = {
-  signIn?: Pick<User, 'id' | 'name' | 'avatar'> & { accessToken: string };
-  errors?: unknown;
+  signIn: SignInResDTO;
 };

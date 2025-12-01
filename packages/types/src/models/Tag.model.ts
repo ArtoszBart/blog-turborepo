@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { Post } from 'src/post/entities/post.entity';
+import { Post } from './Post.model';
 
 @ObjectType()
 export class Tag {

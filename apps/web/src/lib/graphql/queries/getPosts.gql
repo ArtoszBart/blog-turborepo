@@ -1,5 +1,7 @@
-query posts($skip: Float, $take: Float) {
-  posts(skip: $skip, take: $take) {
+# NOTE: Remember to update PostReqDTO type after making changes here.
+
+query posts($payload: PostsReqDTO) {
+  posts(postsReqDTO: $payload) {
     id
     title
     slug

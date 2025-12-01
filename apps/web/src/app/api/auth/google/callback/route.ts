@@ -1,8 +1,8 @@
 import { createSession } from '@/lib/session';
 import { redirect } from 'next/navigation';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(req: NextResponse) {
+export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
 
   const id = searchParams.get('id');
@@ -37,7 +37,7 @@ export async function GET(req: NextResponse) {
     user: {
       id: Number(id),
       name,
-      avatar: avatar || undefined,
+      avatar: avatar || null,
     },
     accessToken,
   });

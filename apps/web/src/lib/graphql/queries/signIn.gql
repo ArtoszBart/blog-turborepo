@@ -1,5 +1,7 @@
-mutation signIn($input: SignInInput!) {
-  signIn(signInInput: $input) {
+# NOTE: Remember to update SignInResDTO type after making changes here.
+
+mutation signIn($payload: SignInReqDTO!) {
+  signIn(signInReqDTO: $payload) {
     id
     name
     avatar

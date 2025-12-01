@@ -3,7 +3,7 @@ import { FaUser } from 'react-icons/fa6';
 import './avatar.scss';
 
 interface IProps {
-  avatarUrl: string | undefined;
+  avatarUrl: string | null;
   onClick?: () => void;
 }
 

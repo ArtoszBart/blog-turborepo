@@ -1,17 +1,17 @@
 import { type DocumentNode, print } from 'graphql';
 import { GraphQLResponse } from './types/gqlResponse';
 
-const fetchGraphQL = async <T>(
+const fetchGraphQL = async <ResponseDTO, RequestDTO = undefined>(
   gqlQuery: DocumentNode,
-  variables = {}
-): Promise<GraphQLResponse<T>> => {
+  payload?: RequestDTO
+): Promise<GraphQLResponse<ResponseDTO>> => {
   const query = print(gqlQuery);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query, variables }),
+      body: JSON.stringify({ query, variables: { payload: payload } }),
     }
   );
 
@@ -19,7 +19,7 @@ const fetchGraphQL = async <T>(
     throw new Error(`Network error: ${response.status}`);
   }
 
-  const result: GraphQLResponse<T> = await response.json();
+  const result: GraphQLResponse<ResponseDTO> = await response.json();
 
   if (result.errors) {
     const status = result.errors[0].extensions?.originalError.statusCode;

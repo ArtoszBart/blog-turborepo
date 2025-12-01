@@ -1,10 +1,10 @@
-import { Post } from '@/models/Post';
+import type { PostResDTO, PostsResDTO } from '@blog-turborepo/types';
 
 export type PostsResponse = {
-  posts: Post[];
+  posts: PostsResDTO[];
   totalPosts: number;
 };
 
 export type GetPostResponse = {
-  getPostById: Post;
+  getPostById: PostResDTO;
 };

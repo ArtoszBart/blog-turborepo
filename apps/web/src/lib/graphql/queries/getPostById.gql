@@ -1,5 +1,7 @@
-query getPostById($id: Int!) {
-  getPostById(id: $id) {
+# NOTE: Remember to update PostResDTO type after making changes here.
+
+query getPostById($payload: PostReqDTO!) {
+  getPostById(postReqDTO: $payload) {
     id
     title
     thumbnail
