@@ -1,7 +1,7 @@
+import { PrismaService } from '@/prisma/prisma.service';
 import { SignUpReqDTO } from '@blog-turborepo/types';
 import { ConflictException, Injectable } from '@nestjs/common';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
-import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class UserService {

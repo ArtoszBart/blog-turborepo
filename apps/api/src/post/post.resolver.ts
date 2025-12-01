@@ -1,3 +1,4 @@
+import { type GqlRequestContext } from '@/graphql/context';
 import {
   Post,
   PostReqDTO,
@@ -6,7 +7,6 @@ import {
   PostsResDTO,
 } from '@blog-turborepo/types';
 import { Args, Context, Int, Query, Resolver } from '@nestjs/graphql';
-import { type GqlRequestContext } from 'src/graphql/context';
 import { PostService } from './post.service';
 
 @Resolver(() => Post)

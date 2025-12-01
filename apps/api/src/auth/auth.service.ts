@@ -1,3 +1,5 @@
+import { PrismaService } from '@/prisma/prisma.service';
+import { UserService } from '@/user/user.service';
 import { SignInReqDTO, SignUpReqDTO } from '@blog-turborepo/types';
 import {
   BadRequestException,
@@ -7,8 +9,6 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
 import { hash, verify } from 'argon2';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { UserService } from 'src/user/user.service';
 import { AuthJwtPayload } from './types/auth-jwt-payload';
 import { OAuthUser } from './types/oath-user';
 
