@@ -43,7 +43,7 @@ const useForm = <T>({ schema, onSubmit }: IForm<T>) => {
   }, [formProps]);
 
   const serverErrorMessage = isSubmitting ? undefined : state?.message;
-  const isSubmitDisabled = !formProps.formState.isValid || isSubmitting;
+  const isSubmitDisabled = isSubmitting;
 
   return {
     formProps,
