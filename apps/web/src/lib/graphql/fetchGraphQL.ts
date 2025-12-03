@@ -1,4 +1,5 @@
 import { type DocumentNode, print } from 'graphql';
+import { convertStringsToDates } from '../dateTime/convertes';
 import { GraphQLResponse } from './types/gqlResponse';
 
 const fetchGraphQL = async <ResponseDTO, RequestDTO = undefined>(
@@ -37,6 +38,7 @@ const fetchGraphQL = async <ResponseDTO, RequestDTO = undefined>(
     throw new Error('No data returned from GraphQL');
   }
 
+  convertStringsToDates(result.data);
   return result;
 };
 

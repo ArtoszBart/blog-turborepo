@@ -1,4 +1,5 @@
 import Comments from '@/components/comments/Comments';
+import Date from '@/components/common/Date';
 import { fetchPostById } from '@/lib/actions/postActions';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -20,7 +21,7 @@ export default async function PostPage({ params }: IProps) {
     <main className='post-page'>
       <h1>{post.title}</h1>
       <p className='post-page_meta'>
-        By {post.author.name} | {new Date(post.createdAt).toLocaleDateString()}
+        By {post.author.name} | <Date date={post.createdAt} />
       </p>
 
       <div className='post-page_thumbnail'>

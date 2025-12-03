@@ -1,4 +1,5 @@
 import Avatar from '@/components/Avatar';
+import Date from '@/components/common/Date';
 import type { CommentsResDTO } from '@blog-turborepo/types';
 import './commentCard.scss';
 
@@ -16,9 +17,10 @@ export default function CommentCard({ comment }: IProps) {
           <p className='comments_card_header_meta_author-name'>
             {comment.author.name}
           </p>
-          <p className='comments_card_header_meta_date'>
-            {new Date(comment.createdAt).toLocaleDateString()}
-          </p>
+          <Date
+            className='comments_card_header_meta_date'
+            date={comment.createdAt}
+          />
         </div>
       </div>
 

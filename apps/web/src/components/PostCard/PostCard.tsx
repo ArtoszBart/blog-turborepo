@@ -1,6 +1,7 @@
 import type { PostsResDTO } from '@blog-turborepo/types';
 import Image from 'next/image';
 import Link from 'next/link';
+import Date from '../common/Date';
 import './postCard.scss';
 
 export default function PostCard({ post }: { post: PostsResDTO }) {
@@ -26,9 +27,8 @@ export default function PostCard({ post }: { post: PostsResDTO }) {
           Read more
         </Link>
       </div>
-      <p className='post-card_footer'>
-        {new Date(post.createdAt).toLocaleDateString()}
-      </p>
+
+      <Date className='post-card_footer' date={post.createdAt} />
     </div>
   );
 }
