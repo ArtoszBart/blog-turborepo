@@ -1,0 +1,21 @@
+@use '../../styles/base' as *;
+
+.comments {
+  background: $color-primary-dark;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: $shadow-l;
+  margin-top: 2.5rem;
+
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: $color-secondary;
+    text-align: start;
+  }
+
+  &_paginator-wrapper {
+    margin-top: 1.5rem;
+  }
+}

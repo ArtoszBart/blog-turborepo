@@ -9,6 +9,9 @@ export * from './dto/posts/PostRes.dto';
 export * from './dto/posts/PostsReq.dto';
 export * from './dto/posts/PostsRes.dto';
 
+export * from './dto/comment/CommentsReq.dto';
+export * from './dto/comment/CommentsRes.dto';
+
 export * from './models/Comment.model';
 export * from './models/Post.model';
 export * from './models/Tag.model';

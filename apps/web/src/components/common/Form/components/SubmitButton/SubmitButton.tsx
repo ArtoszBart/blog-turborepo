@@ -14,7 +14,12 @@ export default function SubmitButton({
   ...props
 }: IProps) {
   return (
-    <button type='submit' aria-disabled={props.disabled} {...props}>
+    <button
+      className='submit-button'
+      type='submit'
+      aria-disabled={props.disabled}
+      {...props}
+    >
       {isSubmitting ? (
         <span className='button_loading'>
           <span />

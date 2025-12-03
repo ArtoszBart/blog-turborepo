@@ -1,14 +1,12 @@
-import { ACTIVE_PAGE_NEIGHBORS, DEFAULT_PAGE_SIZE } from './consts/consts';
+import { ACTIVE_PAGE_NEIGHBORS } from './consts/consts';
+import { IPaginator } from './types/IPaginator';
 
-export const getPaginatorDisplayArray = ({
-  totalItems,
-  currentPage,
-}: {
-  totalItems: number;
-  currentPage: number;
-}) => {
-  const totalPages = Math.ceil(totalItems / DEFAULT_PAGE_SIZE);
-  const safeCurrentPage = Math.min(Math.max(currentPage || 1, 1), totalPages);
+export const getPaginatorDisplayArray = (props: IPaginator) => {
+  const totalPages = Math.ceil(props.totalItems / props.pageSize);
+  const safeCurrentPage = Math.min(
+    Math.max(props.currentPage || 1, 1),
+    totalPages
+  );
 
   if (totalPages <= 2 * ACTIVE_PAGE_NEIGHBORS + 5) {
     return range(1, totalPages);

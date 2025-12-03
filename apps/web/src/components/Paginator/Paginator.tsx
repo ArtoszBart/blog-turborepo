@@ -1,36 +1,22 @@
-import { getPaginatorDisplayArray } from '@/lib/pagination/';
-import Link from 'next/link';
+import { IPaginator } from '@/lib/pagination/types/IPaginator';
+import ClientPaginator from './components/ClientPaginator';
+import ServerPaginator from './components/ServerPaginator';
 import './paginator.scss';
 
-interface IProps {
+export interface IClientPaginator extends IPaginator {
   totalItems: number;
   currentPage: number;
+  pageSize: number;
+  setPage: (page: number) => void;
 }
 
-export default function Paginator({ currentPage, totalItems }: IProps) {
-  const pageNumbers = getPaginatorDisplayArray({
-    currentPage,
-    totalItems,
-  });
-
+export default function Paginator(props: IPaginator | IClientPaginator) {
   return (
     <div className='paginator'>
-      {pageNumbers.map((page, idx) =>
-        page !== '...' ? (
-          <Link
-            key={idx}
-            className={
-              'paginator_item' + (currentPage === page ? ' active' : '')
-            }
-            href={`?page=${page}`}
-          >
-            {page}
-          </Link>
-        ) : (
-          <span key={idx} className='paginator_ellipsis'>
-            ...
-          </span>
-        )
+      {'setPage' in props ? (
+        <ClientPaginator {...props} />
+      ) : (
+        <ServerPaginator {...props} />
       )}
     </div>
   );

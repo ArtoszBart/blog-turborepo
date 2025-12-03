@@ -1,6 +1,8 @@
+import Comments from '@/components/comments/Comments';
 import { fetchPostById } from '@/lib/actions/postActions';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import './postPage.scss';
 
 interface IProps {
   params: Promise<{ id: string }>;
@@ -15,13 +17,13 @@ export default async function PostPage({ params }: IProps) {
   if (!post) notFound();
 
   return (
-    <main>
+    <main className='post-page'>
       <h1>{post.title}</h1>
-      <p>
+      <p className='post-page_meta'>
         By {post.author.name} | {new Date(post.createdAt).toLocaleDateString()}
       </p>
 
-      <div style={{ position: 'relative', width: '400px', height: '300px' }}>
+      <div className='post-page_thumbnail'>
         <Image
           src={post.thumbnail ?? 'no-image.png'}
           alt={post.title}
@@ -30,7 +32,9 @@ export default async function PostPage({ params }: IProps) {
         />
       </div>
 
-      <div>{post.content}</div>
+      <div className='post-page_content'>{post.content}</div>
+
+      <Comments postId={numericId} />
     </main>
   );
 }

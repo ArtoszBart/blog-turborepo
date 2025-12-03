@@ -2,14 +2,18 @@
 @use './animations' as *;
 
 button {
-  padding: 0.65rem 1rem;
   border: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.submit-button {
+  padding: 0.65rem 1rem;
   border-radius: 10px;
   background: $color-accent-2;
   color: $color-primary;
   font-size: 1rem;
   font-weight: 600;
-  cursor: pointer;
   transition: all $animation-fast;
 
   &:hover:enabled {

@@ -1,6 +1,11 @@
 import { z } from 'zod';
 
 export const envSchema = z.object({
+  FRONTEND_URL: z
+    .string({
+      message: 'missing variable',
+    })
+    .pipe(z.url({ message: 'variable must be a valid URL' })),
   DATABASE_URL: z.string({ message: 'missing variable' }),
   JWT_SECRET: z.string({ message: 'missing variable' }),
   JWT_EXPIRES_IN: z

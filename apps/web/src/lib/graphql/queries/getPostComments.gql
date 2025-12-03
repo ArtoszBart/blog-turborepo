@@ -1,0 +1,14 @@
+# NOTE: Remember to update CommentsResDTO type after making changes here.
+
+query postComments($payload: CommentsReqDTO!) {
+  postComments(commentsReqDTO: $payload) {
+    id
+    content
+    createdAt
+    author {
+      name
+      avatar
+    }
+  }
+  totalPostComments(commentsReqDTO: $payload)
+}

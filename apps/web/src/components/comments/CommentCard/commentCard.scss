@@ -1,0 +1,42 @@
+@use '../../../styles/base' as *;
+
+.comments_card {
+  background: $color-primary;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: $shadow;
+  margin-bottom: 1rem;
+  transition: background $animation-fast;
+
+  &:hover {
+    background: $color-secondary-lightest;
+  }
+
+  &_header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+
+    &_meta {
+      display: flex;
+      flex-direction: column;
+
+      &_author-name {
+        font-weight: 600;
+        color: $color-secondary;
+      }
+
+      &_date {
+        font-size: 0.8rem;
+        color: $color-secondary-light;
+      }
+    }
+  }
+
+  &_content {
+    font-size: 1rem;
+    color: $color-secondary;
+    line-height: 1.5;
+  }
+}

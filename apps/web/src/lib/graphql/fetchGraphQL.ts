@@ -22,7 +22,7 @@ const fetchGraphQL = async <ResponseDTO, RequestDTO = undefined>(
   const result: GraphQLResponse<ResponseDTO> = await response.json();
 
   if (result.errors) {
-    const status = result.errors[0].extensions?.originalError.statusCode;
+    const status = result.errors[0].extensions?.originalError?.statusCode;
     const knownErrors = [400, 409];
 
     if (status && knownErrors.includes(status)) {

@@ -59,6 +59,8 @@ type Query {
   posts(postsReqDTO: PostsReqDTO): [Post!]!
   totalPosts: Int!
   getPostById(postReqDTO: PostReqDTO!): Post
+  postComments(commentsReqDTO: CommentsReqDTO!): [Comment!]!
+  totalPostComments(commentsReqDTO: CommentsReqDTO!): Int!
 }
 
 input PostsReqDTO {
@@ -68,6 +70,12 @@ input PostsReqDTO {
 
 input PostReqDTO {
   id: Int!
+}
+
+input CommentsReqDTO {
+  postId: Int!
+  take: Int
+  skip: Int
 }
 
 type Mutation {

@@ -15,9 +15,15 @@
   .paginator_item {
     padding: 0.25rem 0.75rem;
     border-radius: 0.375rem;
+    width: 2rem;
+    background: $color-primary-dark;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: all $animation-fast;
 
     &:hover {
+      background: $color-secondary-lightest;
       color: $color-accent-2-darker;
     }
 
