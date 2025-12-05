@@ -8,23 +8,12 @@ import Form, { Input } from '../common/Form';
 export default function SignInForm() {
   return (
     <Form<SignInReqDTO>
-      className='auth-form'
       schema={SignInFormSchema}
       onSubmit={signIn}
       submitLabel='Sign In'
     >
-      <Input
-        className='auth-form_input'
-        label='Email'
-        name='email'
-        placeholder='john@example.com'
-      />
-      <Input
-        className='auth-form_input'
-        label='Password'
-        name='password'
-        type='password'
-      />
+      <Input label='Email' name='email' placeholder='john@example.com' />
+      <Input label='Password' name='password' type='password' />
     </Form>
   );
 }

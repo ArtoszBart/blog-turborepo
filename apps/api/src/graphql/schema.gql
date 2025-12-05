@@ -79,8 +79,14 @@ input CommentsReqDTO {
 }
 
 type Mutation {
+  createComment(createCommentReqDTO: CreateCommentReqDTO!): Comment!
   signIn(signInReqDTO: SignInReqDTO!): SignInResDTO!
   signUp(createUserInput: SignUpReqDTO!): SignUpResDTO!
+}
+
+input CreateCommentReqDTO {
+  postId: Int!
+  content: String!
 }
 
 input SignInReqDTO {

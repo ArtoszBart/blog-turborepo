@@ -1,17 +1,19 @@
 import { type DocumentNode, print } from 'graphql';
 import { convertStringsToDates } from '../dateTime/convertes';
+import { getSession } from '../session';
 import { GraphQLResponse } from './types/gqlResponse';
 
 const fetchGraphQL = async <ResponseDTO, RequestDTO = undefined>(
   gqlQuery: DocumentNode,
-  payload?: RequestDTO
+  payload?: RequestDTO,
+  headers?: object
 ): Promise<GraphQLResponse<ResponseDTO>> => {
   const query = print(gqlQuery);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
     {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', ...headers },
       body: JSON.stringify({ query, variables: { payload: payload } }),
     }
   );
@@ -40,6 +42,17 @@ const fetchGraphQL = async <ResponseDTO, RequestDTO = undefined>(
 
   convertStringsToDates(result.data);
   return result;
+};
+
+export const authFetchGraphQL = async <ResponseDTO, RequestDTO = undefined>(
+  gqlQuery: DocumentNode,
+  payload?: RequestDTO
+) => {
+  const session = await getSession();
+
+  return fetchGraphQL<ResponseDTO, RequestDTO>(gqlQuery, payload, {
+    Authorization: `Bearer ${session?.accessToken}`,
+  });
 };
 
 export default fetchGraphQL;

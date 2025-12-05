@@ -1,6 +1,7 @@
 import { PrismaService } from '@/prisma/prisma.service';
 import type { CommentsReqDTO } from '@blog-turborepo/types';
 import { Injectable } from '@nestjs/common';
+import { NewComment } from './types/NewComment';
 
 @Injectable()
 export class CommentService {
@@ -18,5 +19,15 @@ export class CommentService {
 
   async count(postId: number) {
     return await this.prisma.comment.count({ where: { postId } });
+  }
+
+  async create(newComment: NewComment) {
+    return await this.prisma.comment.create({
+      data: {
+        content: newComment.content,
+        post: { connect: { id: newComment.postId } },
+        author: { connect: { id: newComment.authorId } },
+      },
+    });
   }
 }

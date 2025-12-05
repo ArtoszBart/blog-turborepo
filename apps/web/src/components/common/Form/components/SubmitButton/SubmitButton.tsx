@@ -4,22 +4,19 @@ import { CSSProperties, PropsWithChildren } from 'react';
 
 interface IProps extends PropsWithChildren {
   style?: CSSProperties;
-  disabled: boolean;
   isSubmitting: boolean;
+  className?: string;
+  form?: string;
 }
 
 export default function SubmitButton({
   children,
   isSubmitting,
+  className,
   ...props
 }: IProps) {
   return (
-    <button
-      className='submit-button'
-      type='submit'
-      aria-disabled={props.disabled}
-      {...props}
-    >
+    <button className={'button' + ' ' + className} type='submit' {...props}>
       {isSubmitting ? (
         <span className='button_loading'>
           <span />

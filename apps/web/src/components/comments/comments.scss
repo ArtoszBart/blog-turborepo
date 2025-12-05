@@ -7,12 +7,88 @@
   box-shadow: $shadow-l;
   margin-top: 2.5rem;
 
-  h2 {
-    font-size: 1.3rem;
-    font-weight: 600;
+  &_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 1.5rem;
-    color: $color-secondary;
-    text-align: start;
+
+    h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: $color-secondary;
+      text-align: start;
+    }
+
+    a {
+      color: $color-accent-2;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $color-accent-2-dark;
+        text-decoration: underline;
+      }
+    }
+
+    &_buttons {
+      position: relative;
+
+      & > button,
+      &_layer {
+        &.visible {
+          animation: $animation-subst-in;
+        }
+
+        &.hidden {
+          animation: $animation-subst-out;
+          opacity: 0;
+        }
+      }
+
+      &_layer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        gap: 0.5rem;
+        pointer-events: none;
+
+        &.visible {
+          pointer-events: initial;
+        }
+      }
+    }
+  }
+
+  &_form {
+    $time: 0.5s;
+    $margin-time: $time * 0.1;
+    $height-time: $time * 0.9;
+
+    margin-bottom: 0;
+    height: 0;
+    overflow: hidden;
+    background: $color-primary;
+    border-radius: 12px;
+    box-shadow: $shadow;
+    transition:
+      margin-bottom $margin-time ease-out $height-time,
+      height $height-time ease-in;
+
+    &.visible {
+      height: 125px;
+      margin-bottom: 1rem;
+      transition:
+        margin-bottom $margin-time ease-in,
+        height $height-time ease-out $margin-time;
+    }
+
+    form {
+      padding: 1.5rem;
+    }
   }
 
   &_paginator-wrapper {

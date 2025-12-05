@@ -4,26 +4,33 @@ import useInput, { IuseInput } from './useInput';
 
 interface IProps extends IuseInput {
   className?: string;
-  label: string;
+  label?: string;
   type?: 'text' | 'password';
   placeholder?: string;
+  multiline?: boolean;
 }
 
 export default function Input(props: IProps) {
   const { inputProps, errorMessage } = useInput(props);
 
   return (
-    <div className={props.className + (errorMessage ? ' invalid' : '')}>
-      <label htmlFor={props.name}>{props.label}</label>
-      <input
-        id={props.name}
-        type={props.type ?? 'text'}
-        placeholder={props.placeholder}
-        {...inputProps}
-      />
-      <span className={`${props.className}_error-message`}>
-        {errorMessage as string}
-      </span>
+    <div className={'form_input' + (errorMessage ? ' invalid' : '')}>
+      {props.label && <label htmlFor={props.name}>{props.label}</label>}
+      {props.multiline ? (
+        <textarea
+          id={props.name}
+          placeholder={props.placeholder}
+          {...inputProps}
+        ></textarea>
+      ) : (
+        <input
+          id={props.name}
+          type={props.type ?? 'text'}
+          placeholder={props.placeholder}
+          {...inputProps}
+        />
+      )}
+      <span className='form_error-message'>{errorMessage as string}</span>
     </div>
   );
 }

@@ -6,6 +6,9 @@ $animation-fast: 0.2s $easing-standard;
 $animation-fade-in: fadeIn $animation;
 $animation-pulse: pulse 1s ease-in-out infinite;
 
+$animation-subst-in: substIn 0.5s linear forwards;
+$animation-subst-out: substOut 0.5s linear forwards;
+
 @keyframes pulse {
   0%,
   100% {
@@ -26,5 +29,29 @@ $animation-pulse: pulse 1s ease-in-out infinite;
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@keyframes substIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes substOut {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
   }
 }

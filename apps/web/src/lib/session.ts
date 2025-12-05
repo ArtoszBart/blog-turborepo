@@ -3,8 +3,10 @@ import { jwtVerify, SignJWT } from 'jose';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-type Session = {
-  user: Pick<User, 'id' | 'name' | 'avatar'>;
+export type SessionUser = Pick<User, 'id' | 'name' | 'avatar'>;
+
+export type Session = {
+  user: SessionUser;
   accessToken: string;
 };
 

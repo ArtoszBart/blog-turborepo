@@ -11,6 +11,7 @@ export * from './dto/posts/PostsRes.dto';
 
 export * from './dto/comment/CommentsReq.dto';
 export * from './dto/comment/CommentsRes.dto';
+export * from './dto/comment/CreateCommentReq.dto';
 
 export * from './models/Comment.model';
 export * from './models/Post.model';

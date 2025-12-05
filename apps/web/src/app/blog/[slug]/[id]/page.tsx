@@ -1,6 +1,7 @@
-import Comments from '@/components/comments/Comments';
+import Comments from '@/components/Comments';
 import Date from '@/components/common/Date';
 import { fetchPostById } from '@/lib/actions/postActions';
+import { getSession } from '@/lib/session';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import './postPage.scss';
@@ -11,11 +12,13 @@ interface IProps {
 
 export default async function PostPage({ params }: IProps) {
   const { id } = await params;
-  const numericId = Number(id);
-  if (isNaN(numericId)) notFound();
+  const postId = Number(id);
+  if (isNaN(postId)) notFound();
 
-  const post = await fetchPostById(numericId);
+  const post = await fetchPostById(postId);
   if (!post) notFound();
+
+  const session = await getSession();
 
   return (
     <main className='post-page'>
@@ -35,7 +38,7 @@ export default async function PostPage({ params }: IProps) {
 
       <div className='post-page_content'>{post.content}</div>
 
-      <Comments postId={numericId} />
+      <Comments user={session?.user} postId={postId} />
     </main>
   );
 }

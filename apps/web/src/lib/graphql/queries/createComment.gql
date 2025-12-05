@@ -1,0 +1,5 @@
+mutation createComment($payload: CreateCommentReqDTO!) {
+  createComment(createCommentReqDTO: $payload) {
+    id
+  }
+}

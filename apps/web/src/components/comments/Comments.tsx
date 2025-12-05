@@ -1,48 +1,54 @@
 'use client';
 
-import { fetchPostComments } from '@/lib/actions/commentActions';
 import { DEFAULT_COMMENTS_PAGE_SIZE } from '@/lib/pagination/consts/consts';
-import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { SessionUser } from '@/lib/session';
 import Paginator from '../Paginator';
-import CommentCard, { CommentCardSkeleton } from './CommentCard';
 import './comments.scss';
+import CommentCard, { CommentCardSkeleton } from './components/CommentCard';
+import CommentForm from './components/CommentForm';
+import CommentsHeader from './components/CommentsHeader';
+import useComments from './useComments';
 
-interface IComments {
+interface IProps {
   postId: number;
+  user?: SessionUser;
 }
 
-const skeletons = Array.from({ length: DEFAULT_COMMENTS_PAGE_SIZE });
-
-export default function Comments({ postId }: IComments) {
-  const [page, setPage] = useState(1);
-
-  const { data, isLoading } = useQuery({
-    queryKey: ['GET_POSTS_COMMENTS', postId, page],
-    queryFn: async () =>
-      await fetchPostComments({
-        postId,
-        page,
-        pageSize: DEFAULT_COMMENTS_PAGE_SIZE,
-      }),
-  });
+export default function Comments({ postId, user }: IProps) {
+  const hook = useComments(postId);
 
   return (
     <div className='comments'>
-      <h2>Comments</h2>
+      <CommentsHeader
+        isUserAuth={!!user}
+        isFormVisible={hook.isFormVisible}
+        isSubmitting={hook.formHook.isSubmitting}
+        showForm={hook.showForm}
+        hideForm={hook.hideForm}
+      />
 
-      {isLoading
-        ? skeletons.map((_, idx) => <CommentCardSkeleton key={idx} />)
-        : data?.postComments.map((comment, idx) => (
-            <CommentCard key={idx} comment={comment} />
-          ))}
+      {user && (
+        <CommentForm
+          hook={hook.formHook}
+          postId={postId}
+          isVisible={hook.isFormVisible}
+        />
+      )}
+
+      {hook.isLoading ? (
+        <CommentCardSkeleton count={3} />
+      ) : (
+        hook.data?.postComments.map((comment) => (
+          <CommentCard key={comment.id} comment={comment} />
+        ))
+      )}
 
       <div className='comments_paginator-wrapper'>
         <Paginator
-          currentPage={page}
-          totalItems={data?.totalPostComments ?? 0}
+          currentPage={hook.page}
+          totalItems={hook.data?.totalPostComments ?? 0}
           pageSize={DEFAULT_COMMENTS_PAGE_SIZE}
-          setPage={setPage}
+          setPage={hook.setPage}
         />
       </div>
     </div>

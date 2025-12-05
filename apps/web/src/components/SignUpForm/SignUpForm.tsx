@@ -13,25 +13,13 @@ export default function SignUpForm() {
 
   return (
     <Form<SignUpFormDTO>
-      className='auth-form'
       schema={SignUpFormSchema}
       onSubmit={signUp}
       submitLabel='Sign Up'
     >
+      <Input label='Name' name='name' placeholder='John Doe' />
+      <Input label='Email' name='email' placeholder='john@example.com' />
       <Input
-        className='auth-form_input'
-        label='Name'
-        name='name'
-        placeholder='John Doe'
-      />
-      <Input
-        className='auth-form_input'
-        label='Email'
-        name='email'
-        placeholder='john@example.com'
-      />
-      <Input
-        className='auth-form_input'
         label='Password'
         name='password'
         type='password'

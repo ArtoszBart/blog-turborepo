@@ -1,15 +1,27 @@
 import { FormState } from '@/lib/actions/types/FormState';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useActionState, useEffect } from 'react';
-import { useForm as rhfUseForm } from 'react-hook-form';
+import { useForm as rhfUseForm, UseFormReturn } from 'react-hook-form';
 import { ZodObject } from 'zod';
 
 export interface IForm<T> {
   schema: ZodObject;
   onSubmit: (_: unknown, formData: FormData) => FormState<T>;
+  onSuccess?: () => void;
 }
 
-const useForm = <T>({ schema, onSubmit }: IForm<T>) => {
+export interface IuseFormReturn {
+  formProps: UseFormReturn;
+  action: (payload: FormData) => void;
+  serverErrorMessage: string | undefined;
+  isSubmitting: boolean;
+}
+
+const useForm = <T>({
+  schema,
+  onSubmit,
+  onSuccess,
+}: IForm<T>): IuseFormReturn => {
   const [state, action, isSubmitting] = useActionState(onSubmit, undefined);
 
   const formProps = rhfUseForm({
@@ -20,6 +32,11 @@ const useForm = <T>({ schema, onSubmit }: IForm<T>) => {
   useEffect(() => {
     if (!state) return;
 
+    if (!state.errors && onSuccess) {
+      formProps.reset();
+      return onSuccess();
+    }
+
     Object.entries(state.data || {}).forEach(([field, value]) =>
       formProps.setValue(field, value, { shouldValidate: false })
     );
@@ -27,7 +44,7 @@ const useForm = <T>({ schema, onSubmit }: IForm<T>) => {
     Object.entries(state.errors || {}).forEach(([field, message]) =>
       formProps.setError(field, { type: 'server', message: message as string })
     );
-  }, [state, formProps]);
+  }, [state, formProps, onSuccess]);
 
   useEffect(() => {
     const subscription = formProps.watch((_, { name }) => {
@@ -43,14 +60,12 @@ const useForm = <T>({ schema, onSubmit }: IForm<T>) => {
   }, [formProps]);
 
   const serverErrorMessage = isSubmitting ? undefined : state?.message;
-  const isSubmitDisabled = isSubmitting;
 
   return {
     formProps,
     action,
     serverErrorMessage,
     isSubmitting,
-    isSubmitDisabled,
   };
 };
 

@@ -7,22 +7,22 @@ button {
   cursor: pointer;
 }
 
-.submit-button {
+.button,
+.button-2 {
   padding: 0.65rem 1rem;
   border-radius: 10px;
-  background: $color-accent-2;
-  color: $color-primary;
+
   font-size: 1rem;
   font-weight: 600;
   transition: all $animation-fast;
 
-  &:hover:enabled {
-    background: $color-accent-2-dark;
-  }
-
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  &:hover:enabled {
+    transform: translateY(1px);
   }
 
   & > * {
@@ -49,5 +49,31 @@ button {
         animation-delay: 0.3s;
       }
     }
+  }
+}
+
+.button {
+  background: $color-accent-2;
+  color: $color-primary;
+
+  &:hover:enabled {
+    background: $color-accent-2-dark;
+  }
+}
+
+.button-2 {
+  background: transparent;
+  border: 2px solid transparent;
+  color: $color-accent-2;
+  border-color: currentColor;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    color: $color-accent-2-dark;
+  }
+
+  &:active {
+    color: $color-accent-2-darker;
   }
 }

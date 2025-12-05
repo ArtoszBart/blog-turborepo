@@ -30,60 +30,6 @@
   }
 
   &-form {
-    width: 100%;
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
-    &_error-message,
-    &_input_error-message {
-      color: $color-error;
-      font-size: 0.875rem;
-      line-height: 1.25rem;
-    }
-
-    &_input {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-
-      label {
-        font-weight: 600;
-        font-size: 0.9rem;
-        color: $color-secondary;
-      }
-
-      input {
-        padding: 0.65rem 1rem;
-        font-size: 1rem;
-        border: 1.5px solid $color-secondary-lightest;
-        border-radius: 0.5rem;
-        transition: all $animation-fast;
-
-        &:focus {
-          border-color: $color-accent-2;
-          box-shadow: 0 0 16px 3px rgba($color-accent-2, 0.15);
-        }
-      }
-
-      &_error-message {
-        opacity: 0;
-        transition: opacity $animation;
-      }
-
-      &.invalid {
-        input {
-          border-color: $color-error;
-          background: $color-error-lightest;
-        }
-
-        span {
-          opacity: 1;
-        }
-      }
-    }
-
     &_password-info {
       span {
         font-weight: 600;
@@ -123,10 +69,6 @@
           }
         }
       }
-    }
-
-    button {
-      margin-top: 1rem;
     }
   }
 
