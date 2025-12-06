@@ -13,7 +13,10 @@ export * from './dto/comment/CommentsReq.dto';
 export * from './dto/comment/CommentsRes.dto';
 export * from './dto/comment/CreateCommentReq.dto';
 
+export * from './dto/like/Like.dto';
+
 export * from './models/Comment.model';
+export * from './models/Like.model';
 export * from './models/Post.model';
 export * from './models/Tag.model';
 export * from './models/User.model';

@@ -5,6 +5,7 @@ button {
   border: none;
   font-family: inherit;
   cursor: pointer;
+  background: none;
 }
 
 .button,
@@ -62,7 +63,6 @@ button {
 }
 
 .button-2 {
-  background: transparent;
   border: 2px solid transparent;
   color: $color-accent-2;
   border-color: currentColor;

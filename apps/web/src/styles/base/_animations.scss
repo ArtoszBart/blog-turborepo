@@ -2,12 +2,15 @@ $easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
 
 $animation: 0.3s $easing-standard;
 $animation-fast: 0.2s $easing-standard;
+$animation-faster: 0.1s $easing-standard;
 
 $animation-fade-in: fadeIn $animation;
 $animation-pulse: pulse 1s ease-in-out infinite;
 
 $animation-subst-in: substIn 0.5s linear forwards;
 $animation-subst-out: substOut 0.5s linear forwards;
+
+$animation-heart: heartPop $animation;
 
 @keyframes pulse {
   0%,
@@ -53,5 +56,20 @@ $animation-subst-out: substOut 0.5s linear forwards;
   }
   100% {
     opacity: 0;
+  }
+}
+
+@keyframes heartPop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.5);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1.1);
   }
 }

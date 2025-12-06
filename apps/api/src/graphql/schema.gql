@@ -61,6 +61,8 @@ type Query {
   getPostById(postReqDTO: PostReqDTO!): Post
   postComments(commentsReqDTO: CommentsReqDTO!): [Comment!]!
   totalPostComments(commentsReqDTO: CommentsReqDTO!): Int!
+  postLikesCount(likeReqDTO: LikeReqDTO!): Int!
+  userLikedPost(likeReqDTO: LikeReqDTO!): Boolean!
 }
 
 input PostsReqDTO {
@@ -78,8 +80,14 @@ input CommentsReqDTO {
   skip: Int
 }
 
+input LikeReqDTO {
+  postId: Int!
+}
+
 type Mutation {
   createComment(createCommentReqDTO: CreateCommentReqDTO!): Comment!
+  likePost(likeReqDTO: LikeReqDTO!): Boolean!
+  unlikePost(likeReqDTO: LikeReqDTO!): Boolean!
   signIn(signInReqDTO: SignInReqDTO!): SignInResDTO!
   signUp(createUserInput: SignUpReqDTO!): SignUpResDTO!
 }

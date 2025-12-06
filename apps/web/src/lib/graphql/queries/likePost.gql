@@ -1,0 +1,3 @@
+mutation likePost($payload: LikeReqDTO!) {
+  likePost(likeReqDTO: $payload)
+}

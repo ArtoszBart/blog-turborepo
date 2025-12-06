@@ -1,0 +1,26 @@
+@use '../../styles/base' as *;
+
+.like {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &_button {
+    display: flex;
+    font-size: 1.5rem;
+    transition: transform $animation-faster;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &.liked {
+      animation: $animation-heart;
+      color: $color-heart;
+    }
+  }
+
+  span {
+    color: $color-secondary-light;
+  }
+}

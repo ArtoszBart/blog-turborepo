@@ -1,5 +1,6 @@
 import Comments from '@/components/Comments';
 import Date from '@/components/common/Date';
+import Like from '@/components/Like';
 import { fetchPostById } from '@/lib/actions/postActions';
 import { getSession } from '@/lib/session';
 import Image from 'next/image';
@@ -37,6 +38,8 @@ export default async function PostPage({ params }: IProps) {
       </div>
 
       <div className='post-page_content'>{post.content}</div>
+
+      {session?.user && <Like postId={postId} />}
 
       <Comments user={session?.user} postId={postId} />
     </main>

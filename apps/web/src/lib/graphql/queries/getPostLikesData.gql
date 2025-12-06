@@ -1,0 +1,4 @@
+query postLikesCount($payload: LikeReqDTO!) {
+  postLikesCount(likeReqDTO: $payload)
+  userLikedPost(likeReqDTO: $payload)
+}
