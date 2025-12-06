@@ -1,5 +1,5 @@
 import { type DocumentNode, print } from 'graphql';
-import { convertStringsToDates } from '../dateTime/convertes';
+import { convertStringsToDates } from '../dateTime/converters';
 import { getSession } from '../session';
 import { GraphQLResponse } from './types/gqlResponse';
 
