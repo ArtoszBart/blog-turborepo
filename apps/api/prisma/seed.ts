@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { PrismaClient } from '@prisma/client';
+import { hash } from 'argon2';
 
 const prisma = new PrismaClient();
 
@@ -14,12 +15,19 @@ function generateSlug(title: string): string {
 async function main() {
   console.log('Seeding The Database');
 
-  const users = Array.from({ length: 10 }).map(() => ({
-    name: faker.person.fullName(),
-    email: faker.internet.email(),
-    bio: faker.lorem.sentence(),
-    avatar: faker.image.avatar(),
-  }));
+  if (!process.env.DEFAULT_PASSWORD)
+    return Promise.reject(new Error('Missing DEFAULT_PASSWORD env'));
+
+  const users = await Promise.all(
+    Array.from({ length: 10 }).map(async () => ({
+      name: faker.person.fullName(),
+      email: faker.internet.email(),
+      bio: faker.lorem.sentence(),
+      avatar: faker.image.avatar(),
+      password: await hash(process.env.DEFAULT_PASSWORD!),
+    })),
+  );
+
   await prisma.user.createMany({
     data: users,
   });
