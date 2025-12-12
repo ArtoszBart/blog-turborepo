@@ -8,6 +8,7 @@ export * from './dto/posts/PostReq.dto';
 export * from './dto/posts/PostRes.dto';
 export * from './dto/posts/PostsReq.dto';
 export * from './dto/posts/PostsRes.dto';
+export * from './dto/posts/UserPostsRes.dto';
 
 export * from './dto/comment/CommentsReq.dto';
 export * from './dto/comment/CommentsRes.dto';

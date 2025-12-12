@@ -1,0 +1,29 @@
+@use '../../../styles/base' as *;
+
+.tooltip {
+  position: relative;
+  display: inline-flex;
+
+  &_popover {
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: $color-primary;
+    color: $color-secondary;
+    padding: 4px 8px;
+    border: 1px solid $color-secondary-lightest;
+    border-radius: 4px;
+    font-size: 0.75rem;
+
+    opacity: 0;
+    white-space: nowrap;
+    pointer-events: none;
+
+    transition: opacity $animation;
+  }
+
+  &:hover .tooltip_popover {
+    opacity: 1;
+  }
+}

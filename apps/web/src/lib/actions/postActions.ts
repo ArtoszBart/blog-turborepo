@@ -1,8 +1,17 @@
 'use server';
 
 import type { PostReqDTO, PostsReqDTO } from '@blog-turborepo/types';
-import fetchGraphQL, { getPostByIdGql, getPostsGql } from '../graphql';
-import { GetPostResponse, PostsResponse } from '../graphql/types/posts';
+import fetchGraphQL, {
+  getPostByIdGql,
+  getPostsGql,
+  getUserPostsGql,
+} from '../graphql';
+import { authFetchGraphQL } from '../graphql/fetchGraphQL';
+import {
+  GetPostResponse,
+  PostsResponse,
+  UserPostsResponse,
+} from '../graphql/types/posts';
 import { PaginationParams } from '../pagination';
 
 export const fetchPosts = async ({ page, pageSize }: PaginationParams) => {
@@ -21,4 +30,16 @@ export const fetchPostById = async (id: number) => {
   );
 
   return response.data?.getPostById;
+};
+
+export const fetchUserPosts = async (pagination: PaginationParams) => {
+  const response = await authFetchGraphQL<UserPostsResponse, PostsReqDTO>(
+    getUserPostsGql,
+    {
+      skip: (pagination.page - 1) * pagination.pageSize,
+      take: pagination.pageSize,
+    }
+  );
+
+  return response.data;
 };

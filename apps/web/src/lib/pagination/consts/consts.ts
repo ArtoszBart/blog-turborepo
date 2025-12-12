@@ -1,4 +1,5 @@
-export const DEFAULT_PAGE_SIZE = 3;
+export const DEFAULT_HOMEPAGE_POSTS_SIZE = 3;
 export const DEFAULT_COMMENTS_PAGE_SIZE = 12;
+export const DEFAULT_USER_POSTS_PAGE_SIZE = 3;
 
 export const ACTIVE_PAGE_NEIGHBORS = 2;

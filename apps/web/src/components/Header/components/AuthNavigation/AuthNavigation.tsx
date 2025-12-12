@@ -1,10 +1,6 @@
 import { getSession } from '@/lib/session';
 import Link from 'next/link';
-import {
-  FaArrowRightFromBracket,
-  FaListUl,
-  FaPenToSquare,
-} from 'react-icons/fa6';
+import { FaArrowRightFromBracket, FaListUl, FaPlus } from 'react-icons/fa6';
 import AuthNavigationWrapper from '../AuthNavigationWrapper';
 import './authMenu.scss';
 
@@ -15,12 +11,12 @@ export default async function AuthNavigation() {
 
   return (
     <AuthNavigationWrapper user={session.user}>
-      <Link href={'/posts/new'}>
+      <Link href={'user/posts'}>
         <FaListUl />
         <span>Posts</span>
       </Link>
       <Link className='auth-menu_link' href={'/posts/new'}>
-        <FaPenToSquare />
+        <FaPlus />
         <span>Create New Post</span>
       </Link>
       <a className='auth-menu_link' href={'/api/auth/signout'}>

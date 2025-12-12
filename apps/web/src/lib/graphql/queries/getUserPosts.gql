@@ -1,0 +1,16 @@
+query userPosts($payload: PostsReqDTO) {
+  userPosts(postsReqDTO: $payload) {
+    id
+    title
+    slug
+    thumbnail
+    published
+    content
+    createdAt
+    _count {
+      likes
+      comments
+    }
+  }
+  userTotalPosts
+}

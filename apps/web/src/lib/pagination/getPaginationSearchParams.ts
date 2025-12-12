@@ -1,12 +1,12 @@
-import { DEFAULT_PAGE_SIZE } from './consts/consts';
 import { PaginationSearchParams } from './types/PaginationSearchParams';
 
 export const getPaginationSearchParams = async (
-  searchParams: PaginationSearchParams
+  searchParams: PaginationSearchParams,
+  defaultPageSize: number
 ) => {
   const { page, pageSize } = await searchParams;
   const safePage = paramsSafeParse(page) ?? 1;
-  const safePageSize = paramsSafeParse(pageSize) ?? DEFAULT_PAGE_SIZE;
+  const safePageSize = paramsSafeParse(pageSize) ?? defaultPageSize;
 
   return {
     page: safePage,

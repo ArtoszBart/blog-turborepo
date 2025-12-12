@@ -1,4 +1,4 @@
-import { DEFAULT_PAGE_SIZE } from '@/lib/pagination/consts/consts';
+import { DEFAULT_HOMEPAGE_POSTS_SIZE } from '@/lib/pagination/consts/consts';
 import type { PostsResDTO } from '@blog-turborepo/types';
 import Paginator from '../Paginator';
 import PostCard from '../PostCard/PostCard';
@@ -25,7 +25,7 @@ export default function Posts(props: IProps) {
       <Paginator
         currentPage={props.currentPage}
         totalItems={props.totalPosts}
-        pageSize={DEFAULT_PAGE_SIZE}
+        pageSize={DEFAULT_HOMEPAGE_POSTS_SIZE}
       />
     </section>
   );

@@ -1,0 +1,124 @@
+@use '../../styles/base' as *;
+
+%row {
+  text-align: center;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / 8;
+  column-gap: 2rem;
+  align-items: center;
+  padding-right: 2rem;
+}
+
+.user-posts {
+  width: 100%;
+  padding-inline: 2rem;
+  display: grid;
+  row-gap: 1rem;
+
+  &_headers {
+    @extend %row;
+
+    p {
+      font-weight: 500;
+      color: $color-secondary-light;
+    }
+  }
+
+  &_entry {
+    @extend %row;
+    box-shadow: $shadow-l;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform $animation-fast;
+
+    &_thumbnail {
+      position: relative;
+      width: 16rem;
+      height: 9rem;
+
+      img {
+        object-fit: cover;
+      }
+    }
+
+    &_draft {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      p,
+      h2 {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+      }
+
+      &_title {
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: $color-secondary;
+      }
+
+      &_content {
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        font-size: 0.875rem;
+        color: $color-secondary-light;
+      }
+    }
+
+    span {
+      color: $color-secondary;
+
+      svg {
+        font-size: 1.2rem;
+      }
+    }
+
+    &_check {
+      color: $color-success;
+    }
+
+    &_x-mark {
+      color: $color-error;
+    }
+
+    &_actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      & > a {
+        transition: color $animation-fast;
+        display: flex;
+      }
+
+      &_show {
+        color: $color-info;
+
+        &:hover {
+          color: $color-info-light;
+        }
+      }
+
+      &_edit {
+        color: $color-warning;
+
+        &:hover {
+          color: $color-warning-light;
+        }
+      }
+
+      &_delete {
+        color: $color-error;
+
+        &:hover {
+          color: $color-error-light;
+        }
+      }
+    }
+  }
+}

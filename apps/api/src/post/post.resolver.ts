@@ -1,11 +1,15 @@
+import { JwtAuthGuard } from '@/auth/guards/jwt-auth.guard';
+import { type GqlRequestContext } from '@/graphql/context';
 import {
   Post,
   PostReqDTO,
   PostResDTO,
   PostsReqDTO,
   PostsResDTO,
+  UserPostsResDTO,
 } from '@blog-turborepo/types';
-import { Args, Int, Query, Resolver } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
+import { Args, Context, Int, Query, Resolver } from '@nestjs/graphql';
 import { PostService } from './post.service';
 
 @Resolver(() => Post)
@@ -29,5 +33,22 @@ export class PostResolver {
     @Args('postReqDTO') payload: PostReqDTO,
   ): Promise<PostResDTO> {
     return this.postService.findById(payload.id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Query(() => [UserPostsResDTO])
+  async userPosts(
+    @Context() context: GqlRequestContext,
+    @Args('postsReqDTO', { nullable: true }) pagination?: PostsReqDTO,
+  ): Promise<UserPostsResDTO[]> {
+    const userId = context.req.user.id;
+    return await this.postService.findByUser(2, pagination);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Query(() => Int, { name: 'userTotalPosts' })
+  userPostsCount(@Context() context: GqlRequestContext): Promise<number> {
+    const userId = context.req.user.id;
+    return this.postService.count(2);
   }
 }

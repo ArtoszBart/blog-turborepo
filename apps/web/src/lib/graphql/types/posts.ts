@@ -1,8 +1,17 @@
-import type { PostResDTO, PostsResDTO } from '@blog-turborepo/types';
+import type {
+  PostResDTO,
+  PostsResDTO,
+  UserPostsResDTO,
+} from '@blog-turborepo/types';
 
 export type PostsResponse = {
   posts: PostsResDTO[];
   totalPosts: number;
+};
+
+export type UserPostsResponse = {
+  userPosts: UserPostsResDTO[];
+  userTotalPosts: number;
 };
 
 export type GetPostResponse = {

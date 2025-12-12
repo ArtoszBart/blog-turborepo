@@ -8,10 +8,10 @@ interface IProps {
 }
 
 export default function Date({ date, className }: IProps) {
-  const [displayDate, setdisplayDate] = useState<string>('');
+  const [displayDate, setDisplayDate] = useState<string>('');
 
   useEffect(() => {
-    setdisplayDate(date.toLocaleDateString());
+    setDisplayDate(date.toLocaleDateString());
   }, [date]);
 
   return <span className={className}>{displayDate}</span>;

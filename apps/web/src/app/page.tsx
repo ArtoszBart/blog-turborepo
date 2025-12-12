@@ -5,13 +5,17 @@ import {
   getPaginationSearchParams,
   PaginationSearchParams,
 } from '@/lib/pagination';
+import { DEFAULT_HOMEPAGE_POSTS_SIZE } from '@/lib/pagination/consts/consts';
 
 interface IProps {
   searchParams: PaginationSearchParams;
 }
 
 export default async function HomePage({ searchParams }: IProps) {
-  const { page, pageSize } = await getPaginationSearchParams(searchParams);
+  const { page, pageSize } = await getPaginationSearchParams(
+    searchParams,
+    DEFAULT_HOMEPAGE_POSTS_SIZE
+  );
   const tmp = await fetchPosts({ page, pageSize });
 
   return (

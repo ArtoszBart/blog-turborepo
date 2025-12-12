@@ -56,6 +56,9 @@ button {
 .button {
   background: $color-accent-2;
   color: $color-primary;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 
   &:hover:enabled {
     background: $color-accent-2-dark;

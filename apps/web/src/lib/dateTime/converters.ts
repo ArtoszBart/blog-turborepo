@@ -21,8 +21,6 @@ export const convertStringsToDates = (obj: any): void => {
       if (typeof obj[key] === 'object' && obj[key] !== null) {
         convertStringsToDates(obj[key]);
       } else if (isISODateString(obj[key])) {
-        console.log(obj[key]);
-
         obj[key] = new Date(obj[key]);
       }
     }
