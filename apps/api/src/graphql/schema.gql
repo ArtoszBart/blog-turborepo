@@ -104,11 +104,20 @@ input LikeReqDTO {
 }
 
 type Mutation {
+  createPost(createPostReqDTO: CreatePostReqDTO!): Post!
   createComment(createCommentReqDTO: CreateCommentReqDTO!): Comment!
   likePost(likeReqDTO: LikeReqDTO!): Boolean!
   unlikePost(likeReqDTO: LikeReqDTO!): Boolean!
   signIn(signInReqDTO: SignInReqDTO!): SignInResDTO!
   signUp(createUserInput: SignUpReqDTO!): SignUpResDTO!
+}
+
+input CreatePostReqDTO {
+  title: String!
+  content: String!
+  thumbnail: String
+  tags: [String!]!
+  isPublished: Boolean!
 }
 
 input CreateCommentReqDTO {

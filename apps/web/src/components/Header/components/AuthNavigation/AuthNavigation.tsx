@@ -15,7 +15,7 @@ export default async function AuthNavigation() {
         <FaListUl />
         <span>Posts</span>
       </Link>
-      <Link className='auth-menu_link' href={'/posts/new'}>
+      <Link className='auth-menu_link' href={'/user/posts/create'}>
         <FaPlus />
         <span>Create New Post</span>
       </Link>

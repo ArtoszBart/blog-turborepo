@@ -25,6 +25,7 @@ export default function Comments({ postId, user }: IProps) {
         isSubmitting={hook.formHook.isSubmitting}
         showForm={hook.showForm}
         hideForm={hook.hideForm}
+        commentsCount={hook.data?.postComments.length || 0}
       />
 
       {user && (

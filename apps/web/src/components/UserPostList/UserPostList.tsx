@@ -33,7 +33,7 @@ export default function UserPostList({ posts }: IProps) {
         <div key={post.id} className='user-posts_entry'>
           <div className='user-posts_entry_thumbnail'>
             <Image
-              src={post.thumbnail ?? 'no-image.png'}
+              src={post.thumbnail || '/no-image.webp'}
               alt={post.title}
               fill
             />
@@ -56,7 +56,7 @@ export default function UserPostList({ posts }: IProps) {
           <span>{post._count.comments}</span>
           <span className='user-posts_entry_actions'>
             <Link
-              href={`/user/posts/${post.id}/edit`}
+              href={`/blog/${post.slug}/${post.id}`}
               className='user-posts_entry_actions_show'
             >
               <Tooltip text='Show'>

@@ -1,0 +1,6 @@
+mutation createPost($payload: CreatePostReqDTO!) {
+  createPost(createPostReqDTO: $payload) {
+    id
+    slug
+  }
+}

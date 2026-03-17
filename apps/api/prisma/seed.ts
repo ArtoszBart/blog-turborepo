@@ -1,16 +1,9 @@
+import { generateSlug } from '@/utils/slug';
 import { faker } from '@faker-js/faker';
 import { PrismaClient } from '@prisma/client';
 import { hash } from 'argon2';
 
 const prisma = new PrismaClient();
-
-function generateSlug(title: string): string {
-  return title
-    .toLowerCase()
-    .trim()
-    .replace(/ /g, '-')
-    .replace(/[^\w-]+/g, '');
-}
 
 async function main() {
   console.log('Seeding The Database');

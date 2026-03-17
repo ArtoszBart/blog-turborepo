@@ -6,7 +6,7 @@ import { GraphQLResponse } from './types/gqlResponse';
 const fetchGraphQL = async <ResponseDTO, RequestDTO = undefined>(
   gqlQuery: DocumentNode,
   payload?: RequestDTO,
-  headers?: object
+  headers?: object,
 ): Promise<GraphQLResponse<ResponseDTO>> => {
   const query = print(gqlQuery);
   const response = await fetch(
@@ -15,7 +15,7 @@ const fetchGraphQL = async <ResponseDTO, RequestDTO = undefined>(
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...headers },
       body: JSON.stringify({ query, variables: { payload: payload } }),
-    }
+    },
   );
 
   if (!response.ok) {
@@ -46,7 +46,7 @@ const fetchGraphQL = async <ResponseDTO, RequestDTO = undefined>(
 
 export const authFetchGraphQL = async <ResponseDTO, RequestDTO = undefined>(
   gqlQuery: DocumentNode,
-  payload?: RequestDTO
+  payload?: RequestDTO,
 ) => {
   const session = await getSession();
 

@@ -1,6 +1,8 @@
 import { PrismaService } from '@/prisma/prisma.service';
+import { generateSlug } from '@/utils/slug';
 import { PostsReqDTO } from '@blog-turborepo/types';
 import { Injectable } from '@nestjs/common';
+import { NewPost } from './types/NewPost';
 
 @Injectable()
 export class PostService {
@@ -39,6 +41,25 @@ export class PostService {
       where: { authorId: userId },
       skip: pagination?.skip,
       take: pagination?.take,
+    });
+  }
+
+  async create(data: NewPost) {
+    return await this.prisma.post.create({
+      data: {
+        title: data.title,
+        content: data.content,
+        published: data.isPublished,
+        thumbnail: data.thumbnail,
+        slug: generateSlug(data.title),
+        author: { connect: { id: data.authorId } },
+        tags: {
+          connectOrCreate: data.tags.map((tag) => ({
+            where: { name: tag },
+            create: { name: tag },
+          })),
+        },
+      },
     });
   }
 }

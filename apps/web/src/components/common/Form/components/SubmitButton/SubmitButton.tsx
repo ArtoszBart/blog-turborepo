@@ -16,7 +16,11 @@ export default function SubmitButton({
   ...props
 }: IProps) {
   return (
-    <button className={'button' + ' ' + className} type='submit' {...props}>
+    <button
+      className={'button' + (className ? ` ${className}` : '')}
+      type='submit'
+      {...props}
+    >
       {isSubmitting ? (
         <span className='button_loading'>
           <span />

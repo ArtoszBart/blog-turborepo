@@ -5,9 +5,10 @@ import useInput, { IuseInput } from './useInput';
 interface IProps extends IuseInput {
   className?: string;
   label?: string;
-  type?: 'text' | 'password';
+  type?: 'text' | 'password' | 'file' | 'checkbox';
   placeholder?: string;
   multiline?: boolean;
+  accept?: string;
 }
 
 export default function Input(props: IProps) {
@@ -26,6 +27,7 @@ export default function Input(props: IProps) {
         <input
           id={props.name}
           type={props.type ?? 'text'}
+          accept={props.accept}
           placeholder={props.placeholder}
           {...inputProps}
         />

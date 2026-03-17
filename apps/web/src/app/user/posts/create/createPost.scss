@@ -1,0 +1,20 @@
+@use '../../../../styles/base' as *;
+
+.create-post {
+  display: flex;
+  justify-content: center;
+
+  &_container {
+    box-shadow: $shadow-l;
+    border-radius: 0.75rem;
+    max-width: 60rem;
+    width: 100%;
+    margin: 1rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+}

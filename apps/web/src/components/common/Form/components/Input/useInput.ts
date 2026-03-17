@@ -4,6 +4,7 @@ export interface IuseInput {
   name: string;
   serverErrorsOnly?: boolean;
   onChange?: (value: string) => void;
+  onFileChange?: (files: FileList | null) => void;
 }
 
 const useInput = (props: IuseInput) => {
@@ -24,6 +25,7 @@ const useInput = (props: IuseInput) => {
   const inputProps = register(props.name, {
     onChange: (e) => {
       props.onChange?.(e.target.value);
+      props.onFileChange?.(e.target.files);
       return e;
     },
   });

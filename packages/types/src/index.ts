@@ -4,6 +4,8 @@ export * from './dto/auth/SignInRes.dto';
 export * from './dto/auth/SignUpReq.dto';
 export * from './dto/auth/SignUpRes.dto';
 
+export * from './dto/posts/CreatePostReq.dto';
+export * from './dto/posts/CreatePostRes.dto';
 export * from './dto/posts/PostReq.dto';
 export * from './dto/posts/PostRes.dto';
 export * from './dto/posts/PostsReq.dto';

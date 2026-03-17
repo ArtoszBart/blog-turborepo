@@ -30,7 +30,7 @@ export default async function PostPage({ params }: IProps) {
 
       <div className='post-page_thumbnail'>
         <Image
-          src={post.thumbnail ?? 'no-image.png'}
+          src={post.thumbnail || '/no-image.webp'}
           alt={post.title}
           fill
           style={{ objectFit: 'cover' }}

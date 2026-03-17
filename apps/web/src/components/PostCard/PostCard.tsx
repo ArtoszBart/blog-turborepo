@@ -9,7 +9,7 @@ export default function PostCard({ post }: { post: PostsResDTO }) {
     <div className='post-card'>
       <div className='post-card_thumbnail'>
         <Image
-          src={post.thumbnail ?? '/no-image.webp'}
+          src={post.thumbnail || '/no-image.webp'}
           alt={post.title ?? ''}
           fill
         />

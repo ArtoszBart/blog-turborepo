@@ -1,4 +1,5 @@
 import type {
+  CreatePostResDTO,
   PostResDTO,
   PostsResDTO,
   UserPostsResDTO,
@@ -16,4 +17,8 @@ export type UserPostsResponse = {
 
 export type GetPostResponse = {
   getPostById: PostResDTO;
+};
+
+export type CreatePostResponse = {
+  createPost: CreatePostResDTO;
 };

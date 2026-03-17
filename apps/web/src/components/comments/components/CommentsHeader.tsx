@@ -5,6 +5,7 @@ interface IProps {
   isUserAuth: boolean;
   isFormVisible: boolean;
   isSubmitting: boolean;
+  commentsCount: number;
   showForm: () => void;
   hideForm: () => void;
 }
@@ -12,7 +13,7 @@ interface IProps {
 export default function CommentsHeader(props: IProps) {
   return (
     <div className='comments_header'>
-      <h2>Comments</h2>
+      <h2>Comments ({props.commentsCount})</h2>
       {props.isUserAuth ? (
         <div className='comments_header_buttons'>
           <button

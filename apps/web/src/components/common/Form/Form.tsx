@@ -9,6 +9,7 @@ import useForm, { IForm } from './useForm';
 interface IProps<T> extends IForm<T>, PropsWithChildren {
   submitLabel: string;
   noSubmit?: boolean;
+  submitRight?: boolean;
 }
 
 export default function Form<T>({
@@ -17,6 +18,7 @@ export default function Form<T>({
   onSubmit,
   submitLabel,
   noSubmit,
+  submitRight,
 }: IProps<T>) {
   const hook = useForm({ schema, onSubmit });
 
@@ -28,7 +30,10 @@ export default function Form<T>({
         <span className={`form_error-message`}>{hook.serverErrorMessage}</span>
 
         {!noSubmit && (
-          <SubmitButton isSubmitting={hook.isSubmitting}>
+          <SubmitButton
+            className={submitRight ? 'submit-right' : ''}
+            isSubmitting={hook.isSubmitting}
+          >
             {submitLabel}
           </SubmitButton>
         )}
