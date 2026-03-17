@@ -18,9 +18,10 @@ export const NewPostSchema = z.object({
   thumbnail: z
     .any()
     .optional()
-    .transform((files) => files?.[0])
-    .refine((file) => !file || file.size > 0, {
-      message: 'Invalid file',
+    .transform((files) => {
+      if (files instanceof File) return files;
+      if (files?.length) return files[0];
+      return undefined;
     }),
   isPublished: z.coerce.boolean().default(false),
 });

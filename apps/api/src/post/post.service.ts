@@ -2,6 +2,7 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { generateSlug } from '@/utils/slug';
 import { PostsReqDTO } from '@blog-turborepo/types';
 import { Injectable } from '@nestjs/common';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { NewPost } from './types/NewPost';
 
 @Injectable()
@@ -45,21 +46,61 @@ export class PostService {
   }
 
   async create(data: NewPost) {
-    return await this.prisma.post.create({
-      data: {
-        title: data.title,
-        content: data.content,
-        published: data.isPublished,
-        thumbnail: data.thumbnail,
-        slug: generateSlug(data.title),
-        author: { connect: { id: data.authorId } },
-        tags: {
-          connectOrCreate: data.tags.map((tag) => ({
-            where: { name: tag },
-            create: { name: tag },
-          })),
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try {
+        return await this.prisma.post.create({
+          data: {
+            title: data.title,
+            content: data.content,
+            published: data.isPublished,
+            thumbnail: data.thumbnail,
+            slug: await this.generateUniqueSlug(data.title),
+            author: { connect: { id: data.authorId } },
+            tags: {
+              connectOrCreate: data.tags.map((tag) => ({
+                where: { name: tag },
+                create: { name: tag },
+              })),
+            },
+          },
+        });
+      } catch (error: any) {
+        const isSlugDuplicated =
+          error instanceof PrismaClientKnownRequestError &&
+          error.code === 'P2002';
+
+        if (!isSlugDuplicated) continue;
+        throw error;
+      }
+    }
+
+    throw new Error('Could not generate unique slug');
+  }
+
+  private async generateUniqueSlug(title: string): Promise<string> {
+    const baseSlug = generateSlug(title);
+
+    const existingSlugs = await this.prisma.post.findMany({
+      where: {
+        slug: {
+          startsWith: baseSlug,
         },
       },
+      select: { slug: true },
     });
+
+    if (existingSlugs.length === 0) return baseSlug;
+
+    const slugSet = new Set(existingSlugs.map((p) => p.slug));
+
+    let counter = 1;
+    let newSlug = `${baseSlug}-${counter}`;
+
+    while (slugSet.has(newSlug)) {
+      counter++;
+      newSlug = `${baseSlug}-${counter}`;
+    }
+
+    return newSlug;
   }
 }

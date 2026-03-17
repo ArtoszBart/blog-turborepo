@@ -16,6 +16,7 @@ import {
   UserPostsResponse,
 } from '../graphql/types/posts';
 import { PaginationParams } from '../pagination';
+import { uploadImage } from '../uploadImage';
 import { formatErrors } from '../zod/formatErrors';
 import { NewPostFormDTO, NewPostSchema } from '../zod/schemas/newPostSchema';
 import { FormState } from './types/FormState';
@@ -66,8 +67,9 @@ export const createPost = async (
     };
   }
 
-  // TODO: add images hosting
-  const thumbnailUrl = '';
+  const thumbnailUrl = validatedFields.data.thumbnail
+    ? await uploadImage(validatedFields.data.thumbnail)
+    : undefined;
 
   const response = await authFetchGraphQL<CreatePostResponse, NewPostFormDTO>(
     createPostGql,
