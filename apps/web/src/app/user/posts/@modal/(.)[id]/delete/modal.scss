@@ -1,0 +1,35 @@
+@use '../../../../../../styles/base/' as *;
+
+.modal {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  background-color: rgba($color-secondary, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &_container {
+    box-shadow: $shadow-l;
+    background-color: $color-primary;
+    border-radius: 0.75rem;
+    max-width: 30rem;
+    width: 100%;
+    margin: 1rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    &_title {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    &_buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+    }
+  }
+}

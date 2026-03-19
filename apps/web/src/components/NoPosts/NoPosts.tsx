@@ -7,7 +7,7 @@ export default function NoPosts() {
     <div className='no-post'>
       <h2>It looks like there&apos;s nothing here yet</h2>
 
-      <Link className='button' href='/post/new'>
+      <Link className='button' href='/user/posts/create'>
         <FaPenToSquare />
         Create your first post
       </Link>
