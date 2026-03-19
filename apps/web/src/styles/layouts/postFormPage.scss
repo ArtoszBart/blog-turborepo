@@ -1,6 +1,6 @@
-@use '../../../../styles/base' as *;
+@use '../base' as *;
 
-.create-post {
+.post-form {
   display: flex;
   justify-content: center;
 

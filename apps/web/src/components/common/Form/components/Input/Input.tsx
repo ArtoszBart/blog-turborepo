@@ -9,6 +9,7 @@ interface IProps extends IuseInput {
   placeholder?: string;
   multiline?: boolean;
   accept?: string;
+  hidden?: boolean;
 }
 
 export default function Input(props: IProps) {
@@ -29,6 +30,7 @@ export default function Input(props: IProps) {
           type={props.type ?? 'text'}
           accept={props.accept}
           placeholder={props.placeholder}
+          hidden={props.hidden}
           {...inputProps}
         />
       )}

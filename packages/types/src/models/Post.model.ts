@@ -21,7 +21,7 @@ export class Post {
   thumbnail: string | null;
 
   @Field(() => Boolean)
-  published: boolean;
+  isPublished: boolean;
 
   @Field()
   createdAt: Date;

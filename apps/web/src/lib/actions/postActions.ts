@@ -1,12 +1,18 @@
 'use server';
 
-import type { PostReqDTO, PostsReqDTO } from '@blog-turborepo/types';
+import type {
+  CreatePostReqDTO,
+  PostReqDTO,
+  PostsReqDTO,
+  UpdatePostReqDTO,
+} from '@blog-turborepo/types';
 import { redirect } from 'next/navigation';
 import fetchGraphQL, {
   createPostGql,
   getPostByIdGql,
   getPostsGql,
   getUserPostsGql,
+  updatePostGql,
 } from '../graphql';
 import { authFetchGraphQL } from '../graphql/fetchGraphQL';
 import {
@@ -18,7 +24,7 @@ import {
 import { PaginationParams } from '../pagination';
 import { uploadImage } from '../uploadImage';
 import { formatErrors } from '../zod/formatErrors';
-import { NewPostFormDTO, NewPostSchema } from '../zod/schemas/newPostSchema';
+import { NewPostForm, postSchema } from '../zod/schemas/postSchema';
 import { FormState } from './types/FormState';
 
 export const fetchPosts = async ({ page, pageSize }: PaginationParams) => {
@@ -54,8 +60,8 @@ export const fetchUserPosts = async (pagination: PaginationParams) => {
 export const createPost = async (
   _: unknown,
   formData: FormData,
-): FormState<NewPostFormDTO> => {
-  const validatedFields = NewPostSchema.safeParse(
+): FormState<NewPostForm> => {
+  const validatedFields = postSchema.safeParse(
     Object.fromEntries(formData.entries()),
   );
   if (!validatedFields.success) {
@@ -67,13 +73,57 @@ export const createPost = async (
     };
   }
 
-  const thumbnailUrl = validatedFields.data.thumbnail
-    ? await uploadImage(validatedFields.data.thumbnail)
-    : undefined;
+  const thumbnailUrl =
+    validatedFields.data.thumbnail && validatedFields.data.thumbnail.size > 0
+      ? await uploadImage(validatedFields.data.thumbnail)
+      : undefined;
 
-  const response = await authFetchGraphQL<CreatePostResponse, NewPostFormDTO>(
+  const response = await authFetchGraphQL<CreatePostResponse, CreatePostReqDTO>(
     createPostGql,
     { ...validatedFields.data, thumbnail: thumbnailUrl },
+  );
+  if (response.errors) {
+    return {
+      data: Object.fromEntries(formData.entries()),
+      message: response.errors[0].message,
+    };
+  }
+
+  const post = response.data?.createPost;
+
+  if (!post?.id || !post.slug) return redirect(`/user/posts`);
+  return redirect(`/blog/${post.slug}/${post.id}`);
+};
+
+export const updatePost = async (
+  _: unknown,
+  formData: FormData,
+): FormState<NewPostForm> => {
+  const validatedFields = postSchema.safeParse(
+    Object.fromEntries(formData.entries()),
+  );
+  if (!validatedFields.success) {
+    const errors = { ...formatErrors(validatedFields.error) };
+
+    return {
+      data: Object.fromEntries(formData.entries()),
+      errors,
+    };
+  }
+
+  const postId = Number(formData.get('id'));
+  if (!postId) {
+    throw new Error('postId is required');
+  }
+
+  const thumbnailUrl =
+    validatedFields.data.thumbnail && validatedFields.data.thumbnail.size > 0
+      ? await uploadImage(validatedFields.data.thumbnail)
+      : undefined;
+
+  const response = await authFetchGraphQL<CreatePostResponse, UpdatePostReqDTO>(
+    updatePostGql,
+    { ...validatedFields.data, postId, thumbnail: thumbnailUrl },
   );
   if (response.errors) {
     return {

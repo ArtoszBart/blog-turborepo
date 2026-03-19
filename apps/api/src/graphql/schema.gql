@@ -24,7 +24,7 @@ type UserPostsResDTO {
   title: String!
   content: String!
   thumbnail: String
-  published: Boolean!
+  isPublished: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
   _count: Count!
@@ -56,7 +56,7 @@ type Post {
   title: String!
   content: String!
   thumbnail: String
-  published: Boolean!
+  isPublished: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
   author: User!
@@ -105,6 +105,7 @@ input LikeReqDTO {
 
 type Mutation {
   createPost(createPostReqDTO: CreatePostReqDTO!): Post!
+  updatePost(updatePostReqDTO: UpdatePostReqDTO!): Post!
   createComment(createCommentReqDTO: CreateCommentReqDTO!): Comment!
   likePost(likeReqDTO: LikeReqDTO!): Boolean!
   unlikePost(likeReqDTO: LikeReqDTO!): Boolean!
@@ -118,6 +119,15 @@ input CreatePostReqDTO {
   thumbnail: String
   tags: [String!]!
   isPublished: Boolean!
+}
+
+input UpdatePostReqDTO {
+  title: String!
+  content: String!
+  thumbnail: String
+  tags: [String!]!
+  isPublished: Boolean!
+  postId: Int!
 }
 
 input CreateCommentReqDTO {

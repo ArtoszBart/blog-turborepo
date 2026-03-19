@@ -1,20 +1,22 @@
 'use client';
 
-import { NewPostFormDTO, NewPostSchema } from '@/lib/zod/schemas/newPostSchema';
+import { NewPostForm, postSchema } from '@/lib/zod/schemas/postSchema';
 import Image from 'next/image';
 import Form, { Input } from '../common/Form';
 import usePostForm, { IPostForm } from './usePostForm';
 
-export default function PostForm({ formAction }: IPostForm) {
-  const { onSubmit, onImageChange, imageUrl } = usePostForm({ formAction });
+export default function PostForm({ formAction, post }: IPostForm) {
+  const hook = usePostForm({ formAction, post });
 
   return (
-    <Form<NewPostFormDTO>
-      schema={NewPostSchema}
-      onSubmit={onSubmit}
-      submitLabel='Create Post'
+    <Form<NewPostForm>
+      schema={postSchema}
+      onSubmit={hook.onSubmit}
+      submitLabel={`${post ? 'Update' : 'Create'} Post`}
       submitRight
+      defaultValues={hook.defaultValues}
     >
+      <Input name='id' hidden />
       <Input
         label='Title'
         name='title'
@@ -42,11 +44,11 @@ export default function PostForm({ formAction }: IPostForm) {
         name='thumbnail'
         type='file'
         accept='image/*'
-        onFileChange={onImageChange}
+        onFileChange={hook.onImageChange}
       />
 
       <Image
-        src={imageUrl || '/no-image.webp'}
+        src={hook.imageUrl || '/no-image.webp'}
         alt='post thumbnail'
         width={200}
         height={150}

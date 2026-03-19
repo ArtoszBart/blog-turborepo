@@ -14,13 +14,14 @@ interface IProps<T> extends IForm<T>, PropsWithChildren {
 
 export default function Form<T>({
   schema,
+  defaultValues,
   children,
   onSubmit,
   submitLabel,
   noSubmit,
   submitRight,
 }: IProps<T>) {
-  const hook = useForm({ schema, onSubmit });
+  const hook = useForm({ schema, onSubmit, defaultValues });
 
   return (
     <FormProvider {...hook.formProps}>

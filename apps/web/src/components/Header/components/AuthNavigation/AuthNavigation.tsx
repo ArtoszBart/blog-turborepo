@@ -11,7 +11,7 @@ export default async function AuthNavigation() {
 
   return (
     <AuthNavigationWrapper user={session.user}>
-      <Link href={'user/posts'}>
+      <Link href={'/user/posts'}>
         <FaListUl />
         <span>Posts</span>
       </Link>

@@ -1,7 +1,7 @@
-import { generateSlug } from '@/utils/slug';
 import { faker } from '@faker-js/faker';
 import { PrismaClient } from '@prisma/client';
 import { hash } from 'argon2';
+import { generateSlug } from '../src/utils/slug';
 
 const prisma = new PrismaClient();
 
@@ -34,28 +34,45 @@ async function main() {
       content: faker.lorem.paragraphs(3),
       thumbnail: faker.image.urlLoremFlickr(),
       authorId: faker.number.int({ min: 1, max: 10 }),
-      published: true,
+      isPublished: true,
     };
   });
-  await Promise.all(
-    posts.map(async (post) => {
-      const commentsNumber = Math.floor(Math.random() * 21);
+  for (const post of posts) {
+    const commentsNumber = Math.floor(Math.random() * 21);
 
-      return await prisma.post.create({
-        data: {
-          ...post,
-          comments: {
-            createMany: {
-              data: Array.from({ length: commentsNumber }).map(() => ({
-                content: faker.lorem.sentence(),
-                authorId: faker.number.int({ min: 1, max: 10 }),
-              })),
-            },
+    await prisma.post.create({
+      data: {
+        ...post,
+        comments: {
+          createMany: {
+            data: Array.from({ length: commentsNumber }).map(() => ({
+              content: faker.lorem.sentence(),
+              authorId: faker.number.int({ min: 1, max: 10 }),
+            })),
           },
         },
-      });
-    }),
-  );
+      },
+    });
+  }
+  // await Promise.all(
+  //   posts.map(async (post) => {
+  //     const commentsNumber = Math.floor(Math.random() * 21);
+
+  //     return await prisma.post.create({
+  //       data: {
+  //         ...post,
+  //         comments: {
+  //           createMany: {
+  //             data: Array.from({ length: commentsNumber }).map(() => ({
+  //               content: faker.lorem.sentence(),
+  //               authorId: faker.number.int({ min: 1, max: 10 }),
+  //             })),
+  //           },
+  //         },
+  //       },
+  //     });
+  //   }),
+  // );
 }
 
 void main()

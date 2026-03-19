@@ -1,11 +1,16 @@
 import { FormState } from '@/lib/actions/types/FormState';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useActionState, useEffect } from 'react';
-import { useForm as rhfUseForm, UseFormReturn } from 'react-hook-form';
+import {
+  DefaultValues,
+  useForm as rhfUseForm,
+  UseFormReturn,
+} from 'react-hook-form';
 import { ZodObject } from 'zod';
 
 export interface IForm<T> {
   schema: ZodObject;
+  defaultValues?: DefaultValues<T>;
   onSubmit: (_: unknown, formData: FormData) => FormState<T>;
   onSuccess?: () => void;
 }
@@ -19,6 +24,7 @@ export interface IuseFormReturn {
 
 const useForm = <T>({
   schema,
+  defaultValues,
   onSubmit,
   onSuccess,
 }: IForm<T>): IuseFormReturn => {
@@ -27,6 +33,7 @@ const useForm = <T>({
   const formProps = rhfUseForm({
     resolver: zodResolver(schema),
     mode: 'onTouched',
+    defaultValues,
   });
 
   useEffect(() => {
@@ -38,11 +45,11 @@ const useForm = <T>({
     }
 
     Object.entries(state.data || {}).forEach(([field, value]) =>
-      formProps.setValue(field, value, { shouldValidate: false })
+      formProps.setValue(field, value, { shouldValidate: false }),
     );
 
     Object.entries(state.errors || {}).forEach(([field, message]) =>
-      formProps.setError(field, { type: 'server', message: message as string })
+      formProps.setError(field, { type: 'server', message: message as string }),
     );
   }, [state, formProps, onSuccess]);
 

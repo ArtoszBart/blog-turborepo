@@ -8,6 +8,7 @@ import {
   PostResDTO,
   PostsReqDTO,
   PostsResDTO,
+  UpdatePostReqDTO,
   UserPostsResDTO,
 } from '@blog-turborepo/types';
 import { UseGuards } from '@nestjs/common';
@@ -62,5 +63,15 @@ export class PostResolver {
   ): Promise<CreatePostResDTO> {
     const authorId = context.req.user.id;
     return await this.postService.create({ ...data, authorId });
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Mutation(() => Post)
+  async updatePost(
+    @Context() context: GqlRequestContext,
+    @Args('updatePostReqDTO') data: UpdatePostReqDTO,
+  ): Promise<CreatePostResDTO> {
+    const userId = context.req.user.id;
+    return await this.postService.update({ userId, data });
   }
 }

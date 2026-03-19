@@ -4,7 +4,7 @@ query userPosts($payload: PostsReqDTO) {
     title
     slug
     thumbnail
-    published
+    isPublished
     content
     createdAt
     _count {

@@ -1,0 +1,6 @@
+mutation updatePost($payload: UpdatePostReqDTO!) {
+  updatePost(updatePostReqDTO: $payload) {
+    id
+    slug
+  }
+}

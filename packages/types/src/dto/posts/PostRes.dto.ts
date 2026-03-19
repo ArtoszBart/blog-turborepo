@@ -4,6 +4,7 @@ export type PostResDTO = {
   content: string;
   thumbnail: string | null;
   createdAt: Date;
+  isPublished: boolean;
   author: {
     name: string;
   };

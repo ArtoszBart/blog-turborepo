@@ -1,7 +1,7 @@
 import { PrismaService } from '@/prisma/prisma.service';
 import { generateSlug } from '@/utils/slug';
-import { PostsReqDTO } from '@blog-turborepo/types';
-import { Injectable } from '@nestjs/common';
+import { PostsReqDTO, UpdatePostReqDTO } from '@blog-turborepo/types';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { NewPost } from './types/NewPost';
 
@@ -52,12 +52,50 @@ export class PostService {
           data: {
             title: data.title,
             content: data.content,
-            published: data.isPublished,
+            isPublished: data.isPublished,
             thumbnail: data.thumbnail,
             slug: await this.generateUniqueSlug(data.title),
             author: { connect: { id: data.authorId } },
             tags: {
               connectOrCreate: data.tags.map((tag) => ({
+                where: { name: tag },
+                create: { name: tag },
+              })),
+            },
+          },
+        });
+      } catch (error: any) {
+        const isSlugDuplicated =
+          error instanceof PrismaClientKnownRequestError &&
+          error.code === 'P2002';
+
+        if (!isSlugDuplicated) continue;
+        throw error;
+      }
+    }
+
+    throw new Error('Could not generate unique slug');
+  }
+
+  async update({ userId, data }: { userId: number; data: UpdatePostReqDTO }) {
+    const authorIdMatched = await this.prisma.post.findUnique({
+      where: { id: data.postId, authorId: userId },
+    });
+
+    if (!authorIdMatched) throw new UnauthorizedException();
+
+    const { postId, ...postData } = data;
+
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try {
+        return await this.prisma.post.update({
+          where: { id: postId },
+          data: {
+            ...postData,
+            slug: await this.generateUniqueSlug(postData.title),
+            tags: {
+              set: [],
+              connectOrCreate: postData.tags.map((tag) => ({
                 where: { name: tag },
                 create: { name: tag },
               })),

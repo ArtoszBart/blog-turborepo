@@ -1,6 +1,6 @@
 import z from 'zod';
 
-export const NewPostSchema = z.object({
+export const postSchema = z.object({
   title: z
     .string()
     .trim()
@@ -18,7 +18,7 @@ export const NewPostSchema = z.object({
   thumbnail: z
     .any()
     .optional()
-    .transform((files) => {
+    .transform((files): File | undefined => {
       if (files instanceof File) return files;
       if (files?.length) return files[0];
       return undefined;
@@ -26,4 +26,7 @@ export const NewPostSchema = z.object({
   isPublished: z.coerce.boolean().default(false),
 });
 
-export type NewPostFormDTO = z.infer<typeof NewPostSchema>;
+export type NewPostForm = z.infer<typeof postSchema>;
+export type UpdatePostForm = NewPostForm & {
+  postId: number;
+};

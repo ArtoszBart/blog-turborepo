@@ -46,7 +46,7 @@ export default function UserPostList({ posts }: IProps) {
             <Date date={post.createdAt} />
           </span>
           <span>
-            {post.published ? (
+            {post.isPublished ? (
               <FaCheck className='user-posts_entry_check' />
             ) : (
               <FaXmark className='user-posts_entry_x-mark' />

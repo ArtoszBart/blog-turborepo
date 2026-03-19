@@ -1,13 +1,23 @@
 import { FormState } from '@/lib/actions/types/FormState';
-import { NewPostFormDTO } from '@/lib/zod/schemas/newPostSchema';
+import { NewPostForm } from '@/lib/zod/schemas/postSchema';
+import { PostResDTO } from '@blog-turborepo/types';
 import { useEffect, useState } from 'react';
 
 export interface IPostForm {
-  formAction: (_: unknown, payload: FormData) => FormState<NewPostFormDTO>;
+  formAction: (_: unknown, payload: FormData) => FormState<NewPostForm>;
+  post?: PostResDTO;
 }
 
-const usePostForm = ({ formAction }: IPostForm) => {
-  const [imageUrl, setImageUrl] = useState<string>();
+const usePostForm = ({ formAction, post }: IPostForm) => {
+  const [imageUrl, setImageUrl] = useState(post?.thumbnail);
+
+  const defaultValues = post
+    ? {
+        ...post,
+        tags: post.tags.map((tag) => tag.name),
+        thumbnail: undefined,
+      }
+    : undefined;
 
   const onImageChange = (files: FileList | null) => {
     const file = files?.[0];
@@ -29,7 +39,7 @@ const usePostForm = ({ formAction }: IPostForm) => {
     };
   }, [imageUrl]);
 
-  return { onSubmit, onImageChange, imageUrl };
+  return { onSubmit, onImageChange, imageUrl, defaultValues };
 };
 
 export default usePostForm;
