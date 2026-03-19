@@ -1,0 +1,59 @@
+@use '../../../../../styles/base/' as *;
+
+.delete-post {
+  display: flex;
+  justify-content: center;
+
+  &_container {
+    box-shadow: $shadow-l;
+    border-radius: 0.75rem;
+    max-width: 30rem;
+    width: 100%;
+    margin: 1rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    &_header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.5rem;
+    }
+
+    &_post {
+      position: relative;
+      padding-block: 1rem;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        left: 1rem;
+        right: 1rem;
+        border-top: 1px solid $color-secondary-lightest;
+      }
+
+      &::before {
+        top: 0;
+      }
+
+      &::after {
+        bottom: 0;
+      }
+
+      &_title {
+        color: $color-secondary-lighter;
+        font-weight: 700;
+      }
+    }
+
+    &_buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+    }
+  }
+}

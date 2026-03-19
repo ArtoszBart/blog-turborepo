@@ -115,6 +115,19 @@ export class PostService {
     throw new Error('Could not generate unique slug');
   }
 
+  async delete({ userId, postId }: { userId: number; postId: number }) {
+    const authorIdMatched = await this.prisma.post.findUnique({
+      where: { id: postId, authorId: userId },
+    });
+    if (!authorIdMatched) throw new UnauthorizedException();
+
+    const result = await this.prisma.post.delete({
+      where: { id: postId },
+    });
+
+    return !!result;
+  }
+
   private async generateUniqueSlug(title: string): Promise<string> {
     const baseSlug = generateSlug(title);
 

@@ -22,3 +22,7 @@ export type GetPostResponse = {
 export type CreatePostResponse = {
   createPost: CreatePostResDTO;
 };
+
+export type DeletePostResponse = {
+  deletePost: boolean;
+};

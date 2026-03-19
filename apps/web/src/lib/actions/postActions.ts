@@ -2,6 +2,7 @@
 
 import type {
   CreatePostReqDTO,
+  DeletePostReqDTO,
   PostReqDTO,
   PostsReqDTO,
   UpdatePostReqDTO,
@@ -9,6 +10,7 @@ import type {
 import { redirect } from 'next/navigation';
 import fetchGraphQL, {
   createPostGql,
+  deletePostGql,
   getPostByIdGql,
   getPostsGql,
   getUserPostsGql,
@@ -17,6 +19,7 @@ import fetchGraphQL, {
 import { authFetchGraphQL } from '../graphql/fetchGraphQL';
 import {
   CreatePostResponse,
+  DeletePostResponse,
   GetPostResponse,
   PostsResponse,
   UserPostsResponse,
@@ -136,4 +139,13 @@ export const updatePost = async (
 
   if (!post?.id || !post.slug) return redirect(`/user/posts`);
   return redirect(`/blog/${post.slug}/${post.id}`);
+};
+
+export const deletePost = async (postId: number) => {
+  const response = await authFetchGraphQL<DeletePostResponse, DeletePostReqDTO>(
+    deletePostGql,
+    { postId },
+  );
+
+  return response.data?.deletePost;
 };

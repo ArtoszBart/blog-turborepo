@@ -22,7 +22,8 @@ button {
     cursor: not-allowed;
   }
 
-  &:hover:enabled {
+  &:is(button):hover:enabled,
+  &:is(a):hover {
     transform: translateY(1px);
   }
 
@@ -61,8 +62,17 @@ button {
   justify-content: center;
   gap: 0.5rem;
 
-  &:hover:enabled {
+  &:is(button):hover:enabled,
+  &:is(a):hover {
     background: $color-accent-2-dark;
+  }
+
+  &.danger {
+    background-color: $color-error;
+
+    &:hover:enabled {
+      background-color: $color-error-dark;
+    }
   }
 }
 

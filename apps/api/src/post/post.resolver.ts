@@ -3,6 +3,7 @@ import { type GqlRequestContext } from '@/graphql/context';
 import {
   CreatePostReqDTO,
   CreatePostResDTO,
+  DeletePostReqDTO,
   Post,
   PostReqDTO,
   PostResDTO,
@@ -73,5 +74,15 @@ export class PostResolver {
   ): Promise<CreatePostResDTO> {
     const userId = context.req.user.id;
     return await this.postService.update({ userId, data });
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Mutation(() => Boolean)
+  async deletePost(
+    @Context() context: GqlRequestContext,
+    @Args('deletePostReqDTO') { postId }: DeletePostReqDTO,
+  ): Promise<boolean> {
+    const userId = context.req.user.id;
+    return await this.postService.delete({ userId, postId });
   }
 }

@@ -106,6 +106,7 @@ input LikeReqDTO {
 type Mutation {
   createPost(createPostReqDTO: CreatePostReqDTO!): Post!
   updatePost(updatePostReqDTO: UpdatePostReqDTO!): Post!
+  deletePost(deletePostReqDTO: DeletePostReqDTO!): Boolean!
   createComment(createCommentReqDTO: CreateCommentReqDTO!): Comment!
   likePost(likeReqDTO: LikeReqDTO!): Boolean!
   unlikePost(likeReqDTO: LikeReqDTO!): Boolean!
@@ -127,6 +128,10 @@ input UpdatePostReqDTO {
   thumbnail: String
   tags: [String!]!
   isPublished: Boolean!
+  postId: Int!
+}
+
+input DeletePostReqDTO {
   postId: Int!
 }
 

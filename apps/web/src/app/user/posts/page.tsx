@@ -15,7 +15,7 @@ interface IProps {
 export default async function UserPostPage({ searchParams }: IProps) {
   const { page, pageSize } = await getPaginationSearchParams(
     searchParams,
-    DEFAULT_USER_POSTS_PAGE_SIZE
+    DEFAULT_USER_POSTS_PAGE_SIZE,
   );
   const result = await fetchUserPosts({ page, pageSize });
 

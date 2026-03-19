@@ -1,0 +1,3 @@
+mutation deletePost($payload: DeletePostReqDTO!) {
+  deletePost(deletePostReqDTO: $payload)
+}
